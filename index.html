@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>locomoco | About</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Poppins:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 왼쪽 사이드바 영역 -->
+      <aside class="sidebar left-sidebar">
+        <!-- 상단 네비게이션 메뉴 -->
+        <nav class="main-nav">
+          <ul>
+            <li class="active">
+              <a href="index.html" data-lang-key="nav.about">ABOUT</a>
+            </li>
+            <li><a href="work.html" data-lang-key="nav.work">WORK</a></li>
+            <li>
+              <a href="contact.html" data-lang-key="nav.contact">CONTACT</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- 네비게이션 아래 언어 선택 -->
+        <div class="language-selector">
+          <ul>
+            <li><button class="lang-btn active" data-lang="ko">KO</button></li>
+            <li><button class="lang-btn" data-lang="ja">JP</button></li>
+            <li><button class="lang-btn" data-lang="en">EN</button></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 메인 콘텐츠 영역 -->
+      <main class="main-content">
+        <div class="about-content">
+          <!-- 왼쪽 컨텐츠 영역 -->
+          <div class="left-content">
+            <!-- 약력 -->
+            <section class="biography">
+              <h2 data-lang-key="about.biography.title">약력</h2>
+              <div class="bio-content" data-lang-key="about.biography.content">
+                <p>안녕하세요, locomoco입니다.</p>
+                <p>
+                  저는 다양한 장르의 커버 영상과 창작 영상을 제작하는 프리랜서
+                  크리에이터입니다.
+                </p>
+                <p>
+                  2018년부터 유튜브를 통해 작업물을 공유해왔으며, 특히 감성적인
+                  영상 연출에 큰 관심을 가지고 있습니다.
+                </p>
+                <p>
+                  현재까지 다양한 아티스트와 협업하여 50개 이상의 프로젝트를
+                  완료했습니다.
+                </p>
+              </div>
+            </section>
+
+            <!-- 제작 영상 설명 -->
+            <section class="video-description">
+              <h2 data-lang-key="about.videoDesc.title">제작 영상 소개</h2>
+              <div class="desc-content" data-lang-key="about.videoDesc.content">
+                <p>제가 주로 제작하는 영상은 다음과 같습니다:</p>
+                <ul>
+                  <li>노래 커버 영상 (뮤직비디오 스타일)</li>
+                  <li>짧은 형식의 콘텐츠 (Youtube Shorts)</li>
+                  <li>아티스트 프로모션 영상</li>
+                  <li>감성적인 스토리텔링 영상</li>
+                </ul>
+                <p>
+                  각 영상마다 아티스트의 개성과 곡의 분위기에 맞는 색감과 연출을
+                  추구합니다.
+                </p>
+              </div>
+            </section>
+          </div>
+
+          <!-- 오른쪽 이미지 영역 -->
+          <div class="right-content">
+            <div class="profile-image">
+              <!-- 실제 이미지 경로로 대체 필요 -->
+              <img
+                src="assets/images/profile/locomoco_main.jpg"
+                alt="locomoco"
+                class="main-profile"
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- 오른쪽 빈 사이드바 영역 -->
+      <aside class="sidebar right-sidebar"></aside>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/language.js"></script>
+  </body>
+</html>

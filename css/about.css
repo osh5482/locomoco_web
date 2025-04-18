@@ -1,0 +1,167 @@
+/* 
+ * about.css - About 페이지 특정 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* About 페이지 레이아웃 */
+.about-content {
+  display: flex;
+  height: calc(100vh - 100px); /* 컨테이너 높이에서 상하 패딩 제외 */
+  align-items: center; /* 화면 중앙에 수직 정렬 */
+  max-width: 100%; /* 최대 너비 설정 */
+  margin: 0 auto; /* 중앙 정렬 */
+}
+
+/* 왼쪽 콘텐츠 영역 */
+.left-content {
+  flex: 1;
+  padding-right: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 중앙 정렬 */
+  gap: 20px; /* 섹션 간의 간격 줄임 */
+}
+
+/* 오른쪽 이미지 영역 */
+.right-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 약력 섹션 */
+.biography {
+  margin-bottom: 0; /* 아래 마진 제거 */
+}
+
+.biography h2 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+.biography h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #333;
+}
+
+.bio-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+/* 영상 설명 섹션 */
+.video-description {
+  margin-top: 0;
+}
+
+.video-description h2 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+.video-description h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #333;
+}
+
+.desc-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.desc-content ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.desc-content li {
+  margin-bottom: 8px;
+  color: #444;
+}
+
+/* 프로필 이미지 */
+.profile-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.main-profile {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.profile-image:hover .main-profile {
+  transform: scale(1.03);
+}
+
+/* 반응형 디자인 - About 페이지 */
+@media (max-width: 992px) {
+  .about-content {
+    height: auto;
+  }
+
+  .left-content {
+    padding-right: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column-reverse;
+  }
+
+  .left-content,
+  .right-content {
+    flex: auto;
+    width: 100%;
+  }
+
+  .left-content {
+    padding-right: 0;
+    margin-top: 40px;
+  }
+
+  .profile-image {
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .biography h2,
+  .video-description h2 {
+    font-size: 1.4rem;
+  }
+
+  .bio-content p,
+  .desc-content p,
+  .desc-content li {
+    font-size: 0.95rem;
+  }
+}
