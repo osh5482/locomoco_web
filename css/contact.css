@@ -1,0 +1,156 @@
+/* 
+ * contact.css - Contact 페이지 특정 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* Contact 페이지 레이아웃 */
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 40px;
+  align-items: center;
+}
+
+/* 헤더 영역 */
+.contact-header {
+  margin-bottom: 50px;
+  text-align: center;
+  width: 100%;
+}
+
+.contact-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+/* 컨택트 폼 컨테이너 */
+.contact-form-container {
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+/* 폼 영역 */
+.contact-form {
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #666;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+/* 폼 제출 버튼 */
+.form-submit {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.submit-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  width: 160px;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-btn:hover {
+  background-color: #555;
+  transform: translateY(-2px);
+}
+
+/* 알림 메시지 */
+.contact-information {
+  margin-top: 60px;
+  text-align: right;
+  color: #ff6b6b;
+  font-size: 0.9rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+  .contact-form-container {
+    flex-direction: column;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-header h1 {
+    font-size: 2rem;
+  }
+
+  .contact-header p {
+    font-size: 0.9rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-header {
+    margin-bottom: 30px;
+  }
+
+  .contact-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+}

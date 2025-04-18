@@ -1,0 +1,31 @@
+{
+  "nav.about": "ABOUT",
+  "nav.work": "WORK",
+  "nav.contact": "CONTACT",
+
+  "about.biography.title": "Biography",
+  "about.biography.content": "<p>Hello, I'm locomoco.</p><p>I'm a freelance creator specializing in cover videos and creative content across various genres.</p><p>Since 2018, I've been sharing my work through YouTube, with a particular focus on emotional visual direction.</p><p>To date, I've completed over 50 projects in collaboration with various artists.</p>",
+  "about.videoDesc.title": "Video Production",
+  "about.videoDesc.content": "<p>The types of videos I create include:</p><ul><li>Song cover videos (music video style)</li><li>Short-form content (YouTube Shorts)</li><li>Artist promotion videos</li><li>Emotional storytelling videos</li></ul><p>For each video, I strive to capture the artist's personality and the mood of the song through appropriate color grading and direction.</p>",
+
+  "contact.title": "CONTACT",
+  "contact.form.name": "Name",
+  "contact.form.email": "Email",
+  "contact.form.phone": "Phone Number",
+  "contact.form.message": "Message",
+  "contact.form.submit": "Submit",
+
+  "work.category.all": "All",
+  "work.category.cover": "Cover Videos",
+  "work.category.shorts": "Shorts",
+  "work.category.promotion": "Promotion",
+  "work.category.story": "Storytelling",
+
+  "work.detail.director": "Director",
+  "work.detail.camera": "Camera",
+  "work.detail.edit": "Editor",
+  "work.detail.artist": "Artist",
+  "work.detail.release": "Release Date",
+  "work.detail.more": "See More",
+  "work.detail.back": "Back to List"
+}

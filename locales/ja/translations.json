@@ -1,0 +1,31 @@
+{
+  "nav.about": "ABOUT",
+  "nav.work": "WORK",
+  "nav.contact": "CONTACT",
+
+  "about.biography.title": "略歴",
+  "about.biography.content": "<p>こんにちは、locomocoです。</p><p>私は様々なジャンルのカバー動画や創作動画を制作するフリーランスクリエイターです。</p><p>2018年からYouTubeで作品を共有してきており、特に感性的な映像演出に大きな関心を持っています。</p><p>これまでに様々なアーティストとコラボレーションし、50以上のプロジェクトを完了しました。</p>",
+  "about.videoDesc.title": "制作動画の紹介",
+  "about.videoDesc.content": "<p>私が主に制作する動画は次のとおりです：</p><ul><li>歌カバー動画（ミュージックビデオスタイル）</li><li>ショート形式のコンテンツ（YouTube Shorts）</li><li>アーティストプロモーション動画</li><li>感性的なストーリーテリング動画</li></ul><p>各動画ごとにアーティストの個性と曲の雰囲気に合った色彩と演出を追求しています。</p>",
+
+  "contact.title": "CONTACT",
+  "contact.form.name": "お名前",
+  "contact.form.email": "メールアドレス",
+  "contact.form.phone": "電話番号",
+  "contact.form.message": "お問い合わせ内容",
+  "contact.form.submit": "送信",
+
+  "work.category.all": "すべて",
+  "work.category.cover": "カバー動画",
+  "work.category.shorts": "ショート",
+  "work.category.promotion": "プロモーション",
+  "work.category.story": "ストーリーテリング",
+
+  "work.detail.director": "監督",
+  "work.detail.camera": "撮影",
+  "work.detail.edit": "編集",
+  "work.detail.artist": "アーティスト",
+  "work.detail.release": "公開日",
+  "work.detail.more": "もっと見る",
+  "work.detail.back": "リストに戻る"
+}

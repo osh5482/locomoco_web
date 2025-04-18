@@ -3,81 +3,45 @@
  * locomoco 포트폴리오 웹사이트
  */
 
-// 언어 데이터
-const translations = {
-  ko: {
-    "nav.about": "ABOUT",
-    "nav.work": "WORK",
-    "nav.contact": "CONTACT",
-    "about.biography.title": "약력",
-    "about.biography.content": `<p>안녕하세요, locomoco입니다.</p>
-            <p>저는 다양한 장르의 커버 영상과 창작 영상을 제작하는 프리랜서 크리에이터입니다.</p>
-            <p>2018년부터 유튜브를 통해 작업물을 공유해왔으며, 특히 감성적인 영상 연출에 큰 관심을 가지고 있습니다.</p>
-            <p>현재까지 다양한 아티스트와 협업하여 50개 이상의 프로젝트를 완료했습니다.</p>`,
-    "about.videoDesc.title": "제작 영상 소개",
-    "about.videoDesc.content": `<p>제가 주로 제작하는 영상은 다음과 같습니다:</p>
-            <ul>
-                <li>노래 커버 영상 (뮤직비디오 스타일)</li>
-                <li>짧은 형식의 콘텐츠 (Youtube Shorts)</li>
-                <li>아티스트 프로모션 영상</li>
-                <li>감성적인 스토리텔링 영상</li>
-            </ul>
-            <p>각 영상마다 아티스트의 개성과 곡의 분위기에 맞는 색감과 연출을 추구합니다.</p>`,
-    // Work 페이지 번역 추가
-    "work.title": "WORK",
-    "work.loadMore": "More",
-  },
-  en: {
-    "nav.about": "ABOUT",
-    "nav.work": "WORK",
-    "nav.contact": "CONTACT",
-    "about.biography.title": "Biography",
-    "about.biography.content": `<p>Hello, I'm locomoco.</p>
-            <p>I'm a freelance creator specializing in cover videos and creative content across various genres.</p>
-            <p>Since 2018, I've been sharing my work through YouTube, with a particular focus on emotional visual direction.</p>
-            <p>To date, I've completed over 50 projects in collaboration with various artists.</p>`,
-    "about.videoDesc.title": "Video Production",
-    "about.videoDesc.content": `<p>The types of videos I create include:</p>
-            <ul>
-                <li>Song cover videos (music video style)</li>
-                <li>Short-form content (YouTube Shorts)</li>
-                <li>Artist promotion videos</li>
-                <li>Emotional storytelling videos</li>
-            </ul>
-            <p>For each video, I strive to capture the artist's personality and the mood of the song through appropriate color grading and direction.</p>`,
-    // Work 페이지 번역 추가
-    "work.title": "WORK",
-    "work.loadMore": "More",
-  },
-  ja: {
-    "nav.about": "ABOUT",
-    "nav.work": "WORK",
-    "nav.contact": "CONTACT",
-    "about.biography.title": "略歴",
-    "about.biography.content": `<p>こんにちは、locomocoです。</p>
-            <p>私は様々なジャンルのカバー動画や創作動画を制作するフリーランスクリエイターです。</p>
-            <p>2018年からYouTubeで作品を共有してきており、特に感性的な映像演出に大きな関心を持っています。</p>
-            <p>これまでに様々なアーティストとコラボレーションし、50以上のプロジェクトを完了しました。</p>`,
-    "about.videoDesc.title": "制作動画の紹介",
-    "about.videoDesc.content": `<p>私が主に制作する動画は次のとおりです：</p>
-            <ul>
-                <li>歌カバー動画（ミュージックビデオスタイル）</li>
-                <li>ショート形式のコンテンツ（YouTube Shorts）</li>
-                <li>アーティストプロモーション動画</li>
-                <li>感性的なストーリーテリング動画</li>
-            </ul>
-            <p>各動画ごとにアーティストの個性と曲の雰囲気に合った色彩と演出を追求しています。</p>`,
-    // Work 페이지 번역 추가
-    "work.title": "WORK",
-    "work.loadMore": "More",
-  },
+// 언어 데이터를 외부 JSON 파일에서 로드하는 함수
+async function loadTranslations(lang) {
+  try {
+    const response = await fetch(`locales/${lang}/translations.json`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`번역 파일 로드 오류(${lang}):`, error);
+    return null;
+  }
+}
+
+// 언어 데이터 객체 (초기 로드 데이터, 추후 외부 파일로 대체)
+let translations = {
+  ko: {},
+  en: {},
+  ja: {},
 };
 
 // 현재 언어 설정 (기본값: 한국어)
-let currentLang = localStorage.getItem("preferredLanguage") || "ko";
+let currentLang = "ko";
 
 // DOM이 로드된 후 실행
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
+  // 초기 언어 데이터 로드
+  await Promise.all([
+    loadTranslations("ko").then((data) => {
+      if (data) translations.ko = data;
+    }),
+    loadTranslations("en").then((data) => {
+      if (data) translations.en = data;
+    }),
+    loadTranslations("ja").then((data) => {
+      if (data) translations.ja = data;
+    }),
+  ]);
+
   // 언어 버튼 이벤트 리스너 설정
   const langButtons = document.querySelectorAll(".lang-btn");
   langButtons.forEach((btn) => {
@@ -91,23 +55,25 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 페이지 로드 시 저장된 언어로 설정
+  // 저장된 언어 설정 확인
   const savedLang = localStorage.getItem("preferredLanguage");
   if (savedLang && translations[savedLang]) {
     currentLang = savedLang;
-
-    // 해당 언어 버튼 활성화
-    const langBtn = document.querySelector(
-      `.lang-btn[data-lang="${currentLang}"]`
-    );
-    if (langBtn) {
-      langButtons.forEach((btn) => btn.classList.remove("active"));
-      langBtn.classList.add("active");
-    }
   }
 
-  // 언어 변경 적용
+  // 페이지 로드 시 기본 언어로 설정
   changeLanguage(currentLang);
+
+  // 해당 언어 버튼 활성화
+  const langBtn = document.querySelector(
+    `.lang-btn[data-lang="${currentLang}"]`
+  );
+  if (langBtn) {
+    document
+      .querySelectorAll(".lang-btn")
+      .forEach((btn) => btn.classList.remove("active"));
+    langBtn.classList.add("active");
+  }
 });
 
 /**
