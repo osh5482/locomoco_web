@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>locomoco | 관리자</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Poppins:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 왼쪽 사이드바 영역 -->
+      <aside class="sidebar left-sidebar">
+        <!-- 관리자 메뉴 -->
+        <nav class="main-nav">
+          <ul>
+            <li class="active">
+              <a href="#dashboard" class="admin-nav-link">대시보드</a>
+            </li>
+            <li>
+              <a href="#about-edit" class="admin-nav-link">About 관리</a>
+            </li>
+            <li>
+              <a href="#work-list" class="admin-nav-link">Work 관리</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- 하단 정보 -->
+        <div class="admin-info">
+          <p>관리자: locomoco</p>
+          <button class="exit-admin-btn">관리자 모드 종료</button>
+        </div>
+      </aside>
+
+      <!-- 메인 콘텐츠 영역 -->
+      <main class="main-content">
+        <!-- 대시보드 섹션 -->
+        <section id="dashboard" class="admin-section active">
+          <div class="admin-header">
+            <h1>관리자 대시보드</h1>
+          </div>
+
+          <div class="dashboard-grid">
+            <!-- 포트폴리오 통계 -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h2>포트폴리오 통계</h2>
+              </div>
+              <div class="card-content">
+                <div class="stat-summary">
+                  <div class="stat-box">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">총 작품</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">커버 영상</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-number">1</span>
+                    <span class="stat-label">쇼츠</span>
+                  </div>
+                  <div class="stat-box">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">기타</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 사이트 통계 -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h2>사이트 방문 통계</h2>
+              </div>
+              <div class="card-content">
+                <div class="chart-container">
+                  <div class="simple-chart">
+                    <div class="chart-bar" style="height: 30%">
+                      <span>월</span>
+                    </div>
+                    <div class="chart-bar" style="height: 45%">
+                      <span>화</span>
+                    </div>
+                    <div class="chart-bar" style="height: 60%">
+                      <span>수</span>
+                    </div>
+                    <div class="chart-bar" style="height: 40%">
+                      <span>목</span>
+                    </div>
+                    <div class="chart-bar" style="height: 80%">
+                      <span>금</span>
+                    </div>
+                    <div class="chart-bar" style="height: 70%">
+                      <span>토</span>
+                    </div>
+                    <div class="chart-bar" style="height: 50%">
+                      <span>일</span>
+                    </div>
+                  </div>
+                  <p class="chart-caption">최근 7일 방문자 추이</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 최근 업데이트 -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h2>최근 업데이트</h2>
+              </div>
+              <div class="card-content">
+                <ul class="update-list">
+                  <li class="update-item">
+                    <span class="update-date">2025.04.15</span>
+                    <span class="update-content">'작품 제목 1' 등록</span>
+                  </li>
+                  <li class="update-item">
+                    <span class="update-date">2025.04.12</span>
+                    <span class="update-content">'작품 제목 2' 편집</span>
+                  </li>
+                  <li class="update-item">
+                    <span class="update-date">2025.04.10</span>
+                    <span class="update-content">About 페이지 업데이트</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 빠른 작업 -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h2>빠른 작업</h2>
+              </div>
+              <div class="card-content">
+                <div class="quick-action-grid">
+                  <a href="#work-add" class="quick-action-btn">
+                    <span class="action-icon">+</span>
+                    <span class="action-text">새 작품 등록</span>
+                  </a>
+                  <button class="quick-action-btn" id="refresh-btn">
+                    <span class="action-icon">↻</span>
+                    <span class="action-text">캐시 새로고침</span>
+                  </button>
+                  <button class="quick-action-btn" id="backup-btn">
+                    <span class="action-icon">↓</span>
+                    <span class="action-text">백업 다운로드</span>
+                  </button>
+                  <button class="quick-action-btn" id="help-btn">
+                    <span class="action-icon">?</span>
+                    <span class="action-text">도움말</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- About 페이지 관리 섹션 -->
+        <section id="about-edit" class="admin-section">
+          <div class="admin-header">
+            <h1>About 페이지 관리</h1>
+          </div>
+
+          <div class="edit-tabs">
+            <button class="tab-btn active" data-lang="ko">한국어</button>
+            <button class="tab-btn" data-lang="ja">일본어</button>
+            <button class="tab-btn" data-lang="en">영어</button>
+          </div>
+
+          <div class="tab-content" id="about-edit-ko">
+            <div class="form-group">
+              <label for="biography-title-ko">약력 제목</label>
+              <input
+                type="text"
+                id="biography-title-ko"
+                value="약력"
+                class="admin-input"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="biography-content-ko">약력 내용</label>
+              <textarea
+                id="biography-content-ko"
+                class="admin-textarea"
+                rows="6"
+              >
+안녕하세요, locomoco입니다.
+
+저는 다양한 장르의 커버 영상과 창작 영상을 제작하는 프리랜서 크리에이터입니다.
+
+2018년부터 유튜브를 통해 작업물을 공유해왔으며, 특히 감성적인 영상 연출에 큰 관심을 가지고 있습니다.
+
+현재까지 다양한 아티스트와 협업하여 50개 이상의 프로젝트를 완료했습니다.</textarea
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="video-desc-title-ko">제작 영상 소개 제목</label>
+              <input
+                type="text"
+                id="video-desc-title-ko"
+                value="제작 영상 소개"
+                class="admin-input"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="video-desc-content-ko">제작 영상 소개 내용</label>
+              <textarea
+                id="video-desc-content-ko"
+                class="admin-textarea"
+                rows="8"
+              >
+제가 주로 제작하는 영상은 다음과 같습니다:
+
+• 노래 커버 영상 (뮤직비디오 스타일)
+• 짧은 형식의 콘텐츠 (Youtube Shorts)
+• 아티스트 프로모션 영상
+• 감성적인 스토리텔링 영상
+
+각 영상마다 아티스트의 개성과 곡의 분위기에 맞는 색감과 연출을 추구합니다.</textarea
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="profile-image">프로필 이미지</label>
+              <div class="image-upload-container">
+                <div class="current-image">
+                  <img
+                    src="../assets/images/profile/locomoco_main.jpg"
+                    alt="현재 프로필"
+                    class="preview-image"
+                  />
+                  <p>현재 이미지</p>
+                </div>
+                <div class="upload-box">
+                  <input
+                    type="file"
+                    id="profile-image"
+                    class="file-input"
+                    accept="image/*"
+                  />
+                  <label for="profile-image" class="upload-label">
+                    <span class="upload-icon">+</span>
+                    <span class="upload-text">이미지 변경</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="admin-btn save-btn">저장하기</button>
+              <button class="admin-btn cancel-btn">취소</button>
+            </div>
+          </div>
+
+          <!-- 일본어, 영어 탭 내용은 생략 (한국어와 유사한 구조) -->
+          <div class="tab-content hidden" id="about-edit-ja">
+            <!-- 일본어 내용 관리 (구조는 동일) -->
+          </div>
+
+          <div class="tab-content hidden" id="about-edit-en">
+            <!-- 영어 내용 관리 (구조는 동일) -->
+          </div>
+        </section>
+
+        <!-- Work 관리 섹션 - 목록 -->
+        <section id="work-list" class="admin-section">
+          <div class="admin-header">
+            <h1>Work 목록 관리</h1>
+            <a href="#work-add" class="admin-btn add-btn">새 작품 추가</a>
+          </div>
+
+          <div class="work-admin-grid">
+            <!-- 작품 항목 1 -->
+            <div class="work-admin-item">
+              <div class="work-admin-thumb">
+                <img
+                  src="../assets/images/portfolio/thumb_sample1.jpg"
+                  alt="작품 1"
+                />
+              </div>
+              <div class="work-admin-info">
+                <h3>작품 제목 1</h3>
+                <p>의뢰인: 아티스트명</p>
+                <p>제작: 2024년</p>
+              </div>
+              <div class="work-admin-actions">
+                <button class="admin-btn edit-btn">편집</button>
+                <button class="admin-btn delete-btn">삭제</button>
+              </div>
+            </div>
+
+            <!-- 작품 항목 2 -->
+            <div class="work-admin-item">
+              <div class="work-admin-thumb">
+                <img
+                  src="../assets/images/portfolio/thumb_sample2.jpg"
+                  alt="작품 2"
+                />
+              </div>
+              <div class="work-admin-info">
+                <h3>작품 제목 2</h3>
+                <p>의뢰인: 아티스트명</p>
+                <p>제작: 2023년</p>
+              </div>
+              <div class="work-admin-actions">
+                <button class="admin-btn edit-btn">편집</button>
+                <button class="admin-btn delete-btn">삭제</button>
+              </div>
+            </div>
+
+            <!-- 작품 항목 3 -->
+            <div class="work-admin-item">
+              <div class="work-admin-thumb">
+                <img
+                  src="../assets/images/portfolio/thumb_sample3.jpg"
+                  alt="작품 3"
+                />
+              </div>
+              <div class="work-admin-info">
+                <h3>작품 제목 3</h3>
+                <p>의뢰인: 아티스트명</p>
+                <p>제작: 2023년</p>
+              </div>
+              <div class="work-admin-actions">
+                <button class="admin-btn edit-btn">편집</button>
+                <button class="admin-btn delete-btn">삭제</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Work 관리 섹션 - 추가/편집 -->
+        <section id="work-add" class="admin-section">
+          <div class="admin-header">
+            <h1>새 작품 등록</h1>
+            <button class="admin-btn back-btn" data-target="#work-list">
+              목록으로 돌아가기
+            </button>
+          </div>
+
+          <div class="edit-tabs">
+            <button class="tab-btn active" data-lang="ko">한국어</button>
+            <button class="tab-btn" data-lang="ja">일본어</button>
+            <button class="tab-btn" data-lang="en">영어</button>
+          </div>
+
+          <div class="tab-content" id="work-edit-ko">
+            <div class="form-group">
+              <label for="work-title-ko">작품 제목</label>
+              <input
+                type="text"
+                id="work-title-ko"
+                placeholder="작품 제목을 입력하세요"
+                class="admin-input"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="work-artist">의뢰인/아티스트</label>
+              <input
+                type="text"
+                id="work-artist"
+                placeholder="의뢰인 또는 아티스트 이름"
+                class="admin-input"
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group half">
+                <label for="work-style">영상 스타일</label>
+                <select id="work-style" class="admin-select">
+                  <option value="cover">커버 영상</option>
+                  <option value="shorts">쇼츠</option>
+                  <option value="promotion">프로모션</option>
+                  <option value="story">스토리텔링</option>
+                </select>
+              </div>
+
+              <div class="form-group half">
+                <label for="work-year">제작 연도</label>
+                <select id="work-year" class="admin-select">
+                  <option value="2025">2025</option>
+                  <option value="2024" selected>2024</option>
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                  <option value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="work-youtube">유튜브 URL</label>
+              <input
+                type="text"
+                id="work-youtube"
+                placeholder="https://www.youtube.com/watch?v=..."
+                class="admin-input"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="work-thumbnail">썸네일 이미지</label>
+              <div class="upload-box large-upload">
+                <input
+                  type="file"
+                  id="work-thumbnail"
+                  class="file-input"
+                  accept="image/*"
+                />
+                <label for="work-thumbnail" class="upload-label">
+                  <span class="upload-icon">+</span>
+                  <span class="upload-text">썸네일 업로드</span>
+                  <span class="upload-hint">권장 비율: 4:3, JPG 또는 PNG</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>GIF 미리보기 (4개)</label>
+              <div class="gif-upload-grid">
+                <div class="upload-box small-upload">
+                  <input
+                    type="file"
+                    id="work-gif-1"
+                    class="file-input"
+                    accept="image/gif"
+                  />
+                  <label for="work-gif-1" class="upload-label">
+                    <span class="upload-icon">+</span>
+                    <span class="upload-text">GIF 1</span>
+                  </label>
+                </div>
+
+                <div class="upload-box small-upload">
+                  <input
+                    type="file"
+                    id="work-gif-2"
+                    class="file-input"
+                    accept="image/gif"
+                  />
+                  <label for="work-gif-2" class="upload-label">
+                    <span class="upload-icon">+</span>
+                    <span class="upload-text">GIF 2</span>
+                  </label>
+                </div>
+
+                <div class="upload-box small-upload">
+                  <input
+                    type="file"
+                    id="work-gif-3"
+                    class="file-input"
+                    accept="image/gif"
+                  />
+                  <label for="work-gif-3" class="upload-label">
+                    <span class="upload-icon">+</span>
+                    <span class="upload-text">GIF 3</span>
+                  </label>
+                </div>
+
+                <div class="upload-box small-upload">
+                  <input
+                    type="file"
+                    id="work-gif-4"
+                    class="file-input"
+                    accept="image/gif"
+                  />
+                  <label for="work-gif-4" class="upload-label">
+                    <span class="upload-icon">+</span>
+                    <span class="upload-text">GIF 4</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="work-desc-ko">작품 상세 설명</label>
+              <textarea
+                id="work-desc-ko"
+                class="admin-textarea"
+                rows="5"
+                placeholder="작품에 대한 상세 설명을 입력하세요"
+              ></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="admin-btn save-btn">작품 등록하기</button>
+              <button class="admin-btn cancel-btn" data-target="#work-list">
+                취소
+              </button>
+            </div>
+          </div>
+
+          <!-- 일본어, 영어 탭 내용은 생략 (한국어와 유사한 구조) -->
+          <div class="tab-content hidden" id="work-edit-ja">
+            <!-- 일본어 내용 관리 (구조는 동일) -->
+          </div>
+
+          <div class="tab-content hidden" id="work-edit-en">
+            <!-- 영어 내용 관리 (구조는 동일) -->
+          </div>
+        </section>
+      </main>
+
+      <!-- 오른쪽 빈 사이드바 영역 -->
+      <aside class="sidebar right-sidebar"></aside>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/admin_main.js"></script>
+  </body>
+</html>
