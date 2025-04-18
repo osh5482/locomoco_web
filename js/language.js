@@ -23,6 +23,9 @@ const translations = {
                 <li>감성적인 스토리텔링 영상</li>
             </ul>
             <p>각 영상마다 아티스트의 개성과 곡의 분위기에 맞는 색감과 연출을 추구합니다.</p>`,
+    // Work 페이지 번역 추가
+    "work.title": "WORK",
+    "work.loadMore": "More",
   },
   en: {
     "nav.about": "ABOUT",
@@ -42,6 +45,9 @@ const translations = {
                 <li>Emotional storytelling videos</li>
             </ul>
             <p>For each video, I strive to capture the artist's personality and the mood of the song through appropriate color grading and direction.</p>`,
+    // Work 페이지 번역 추가
+    "work.title": "WORK",
+    "work.loadMore": "More",
   },
   ja: {
     "nav.about": "ABOUT",
@@ -61,11 +67,14 @@ const translations = {
                 <li>感性的なストーリーテリング動画</li>
             </ul>
             <p>各動画ごとにアーティストの個性と曲の雰囲気に合った色彩と演出を追求しています。</p>`,
+    // Work 페이지 번역 추가
+    "work.title": "WORK",
+    "work.loadMore": "More",
   },
 };
 
 // 현재 언어 설정 (기본값: 한국어)
-let currentLang = "ko";
+let currentLang = localStorage.getItem("preferredLanguage") || "ko";
 
 // DOM이 로드된 후 실행
 document.addEventListener("DOMContentLoaded", function () {
@@ -82,7 +91,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 페이지 로드 시 기본 언어로 설정
+  // 페이지 로드 시 저장된 언어로 설정
+  const savedLang = localStorage.getItem("preferredLanguage");
+  if (savedLang && translations[savedLang]) {
+    currentLang = savedLang;
+
+    // 해당 언어 버튼 활성화
+    const langBtn = document.querySelector(
+      `.lang-btn[data-lang="${currentLang}"]`
+    );
+    if (langBtn) {
+      langButtons.forEach((btn) => btn.classList.remove("active"));
+      langBtn.classList.add("active");
+    }
+  }
+
+  // 언어 변경 적용
   changeLanguage(currentLang);
 });
 
@@ -131,23 +155,3 @@ function changeLanguage(lang) {
   // 로컬 스토리지에 언어 설정 저장
   localStorage.setItem("preferredLanguage", lang);
 }
-
-// 페이지 로드 시 저장된 언어 설정 적용
-window.addEventListener("load", function () {
-  const savedLang = localStorage.getItem("preferredLanguage");
-  if (savedLang && translations[savedLang]) {
-    currentLang = savedLang;
-    changeLanguage(currentLang);
-
-    // 해당 언어 버튼 활성화
-    const langBtn = document.querySelector(
-      `.lang-btn[data-lang="${currentLang}"]`
-    );
-    if (langBtn) {
-      document
-        .querySelectorAll(".lang-btn")
-        .forEach((btn) => btn.classList.remove("active"));
-      langBtn.classList.add("active");
-    }
-  }
-});

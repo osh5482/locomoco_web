@@ -1,0 +1,170 @@
+/* 
+ * work.css - Work 페이지 특정 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* Work 페이지 레이아웃 */
+.work-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: calc(100vh - 100px);
+}
+
+/* 작품 헤더 */
+.work-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.work-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.work-description {
+  font-size: 0.9rem;
+  color: #888;
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* 작품 그리드 */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  width: 100%;
+}
+
+/* 작품 아이템 */
+.work-item {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.work-item:hover {
+  transform: translateY(-5px);
+}
+
+.work-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%; /* 4:3 비율 */
+  overflow: hidden;
+  background-color: #4a3e43; /* 어두운 보라색 배경 (이미지 기반) */
+  border-radius: 5px;
+}
+
+.thumbnail-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+  opacity: 0; /* 이미지 지연 로딩을 위해 초기 상태는 숨김 */
+}
+
+.thumbnail-img[src] {
+  opacity: 1; /* 이미지 로드 완료 시 표시 */
+}
+
+/* 작품 정보 */
+.work-info {
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.work-title {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  color: #333;
+  text-align: center;
+}
+
+/* 링크 스타일 제거 */
+.work-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* More 버튼 */
+.load-more-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.load-more-btn {
+  display: inline-block;
+  padding: 10px 40px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease;
+}
+
+.load-more-btn:hover {
+  background-color: #555;
+}
+
+/* 반응형 디자인 - Work 페이지 */
+@media (max-width: 1200px) {
+  .work-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+}
+
+@media (max-width: 992px) {
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .work-header h1 {
+    font-size: 2rem;
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .work-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .work-description {
+    font-size: 0.8rem;
+  }
+
+  .work-info .work-title {
+    font-size: 0.85rem;
+  }
+}
