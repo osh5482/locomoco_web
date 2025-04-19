@@ -4,6 +4,34 @@
  */
 
 document.addEventListener("DOMContentLoaded", function () {
+  // 초기 페이지 로드 시 대시보드 활성화 상태 확인
+  const initActiveDashboard = () => {
+    const dashboardLink = document.querySelector('a[href="#dashboard"]');
+    if (dashboardLink) {
+      // 모든 네비게이션 링크의 활성화 상태 제거
+      document.querySelectorAll(".admin-nav-link").forEach((nav) => {
+        nav.parentElement.classList.remove("active");
+      });
+
+      // 대시보드 링크 활성화
+      dashboardLink.parentElement.classList.add("active");
+
+      // 모든 섹션 비활성화
+      document.querySelectorAll(".admin-section").forEach((section) => {
+        section.classList.remove("active");
+      });
+
+      // 대시보드 섹션 활성화
+      const dashboardSection = document.querySelector("#dashboard");
+      if (dashboardSection) {
+        dashboardSection.classList.add("active");
+      }
+    }
+  };
+
+  // 페이지 로드 시 초기화 함수 실행
+  initActiveDashboard();
+
   // 관리자 섹션 전환 기능
   const navLinks = document.querySelectorAll(".admin-nav-link");
   const sections = document.querySelectorAll(".admin-section");
