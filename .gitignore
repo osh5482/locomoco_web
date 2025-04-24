@@ -1,0 +1,69 @@
+# Python 관련
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 가상 환경
+venv/
+env/
+ENV/
+.env
+.venv
+env.bak/
+venv.bak/
+
+# IDE 관련
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.spyderproject
+.spyproject
+.ropeproject
+*.swp
+*.swo
+
+# 로컬 개발 환경
+.DS_Store
+Thumbs.db
+.coverage
+htmlcov/
+.pytest_cache/
+coverage.xml
+*.cover
+.hypothesis/
+
+# 프로젝트 특정
+*.sqlite
+*.db
+uploads/
+logs/
+*.log
+
+# 데이터베이스 마이그레이션
+alembic/versions/*.py
+!alembic/versions/__init__.py
+
+# 정적 파일 업로드 (관리자 페이지에서 업로드되는 파일)
+app/static/uploads/
+
+# 환경 설정 파일
+config.ini
+secrets.json
