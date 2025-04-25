@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>locomoco | Work</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/work.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Poppins:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 왼쪽 사이드바 영역 -->
+      <aside class="sidebar left-sidebar">
+        <!-- 상단 네비게이션 메뉴 -->
+        <nav class="main-nav">
+          <ul>
+            <li>
+              <a href="/" data-lang-key="nav.about">ABOUT</a>
+            </li>
+            <li class="active">
+              <a href="/work" data-lang-key="nav.work">WORK</a>
+            </li>
+            <li>
+              <a href="/contact" data-lang-key="nav.contact">CONTACT</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- 네비게이션 아래 언어 선택 -->
+        <div class="language-selector">
+          <ul>
+            <li><button class="lang-btn active" data-lang="ko">KO</button></li>
+            <li><button class="lang-btn" data-lang="ja">JP</button></li>
+            <li><button class="lang-btn" data-lang="en">EN</button></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 메인 콘텐츠 영역 -->
+      <main class="main-content">
+        <div class="work-content">
+          <!-- 작품 헤더 -->
+          <div class="work-header">
+            <h1 data-lang-key="work.title">WORK</h1>
+          </div>
+
+          <!-- 작품 그리드 -->
+          <div class="work-grid">
+            <!-- 작품 항목 1 -->
+            <div class="work-item">
+              <a href="/work/sample1" class="work-link">
+                <div class="work-thumbnail">
+                  <img
+                    src="{{ url_for('static', path='/assets/images/portfolio/thumb_sample1.jpg') }}"
+                    alt="샘플 작품 1"
+                    class="thumbnail-img"
+                  />
+                </div>
+                <div class="work-info">
+                  <p class="work-title">작품 제목 1</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- 작품 항목 2 -->
+            <div class="work-item">
+              <a href="/work/sample2" class="work-link">
+                <div class="work-thumbnail">
+                  <img
+                    src="{{ url_for('static', path='/assets/images/portfolio/thumb_sample2.jpg') }}"
+                    alt="샘플 작품 2"
+                    class="thumbnail-img"
+                  />
+                </div>
+                <div class="work-info">
+                  <p class="work-title">작품 제목 2</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- 작품 항목 3 -->
+            <div class="work-item">
+              <a href="/work/sample3" class="work-link">
+                <div class="work-thumbnail">
+                  <img
+                    src="{{ url_for('static', path='/assets/images/portfolio/thumb_sample3.jpg') }}"
+                    alt="샘플 작품 3"
+                    class="thumbnail-img"
+                  />
+                </div>
+                <div class="work-info">
+                  <p class="work-title">작품 제목 3</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- 작품 항목 4 -->
+            <div class="work-item">
+              <a href="/work/sample4" class="work-link">
+                <div class="work-thumbnail">
+                  <img
+                    src="{{ url_for('static', path='/assets/images/portfolio/thumb_sample4.jpg') }}"
+                    alt="샘플 작품 4"
+                    class="thumbnail-img"
+                  />
+                </div>
+                <div class="work-info">
+                  <p class="work-title">작품 제목 4</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- 작품 항목 5 -->
+            <div class="work-item">
+              <a href="/work/sample5" class="work-link">
+                <div class="work-thumbnail">
+                  <img
+                    src="{{ url_for('static', path='/assets/images/portfolio/thumb_sample5.jpg') }}"
+                    alt="샘플 작품 5"
+                    class="thumbnail-img"
+                  />
+                </div>
+                <div class="work-info">
+                  <p class="work-title">작품 제목 5</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- 작품 항목 6 -->
+            <div class="work-item">
+              <a href="/work/sample6" class="work-link">
+                <div class="work-thumbnail">
+                  <img
+                    src="{{ url_for('static', path='/assets/images/portfolio/thumb_sample6.jpg') }}"
+                    alt="샘플 작품 6"
+                    class="thumbnail-img"
+                  />
+                </div>
+                <div class="work-info">
+                  <p class="work-title">작품 제목 6</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 추가 작품 로드 버튼 -->
+          <div class="load-more-container">
+            <a
+              href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
+              class="load-more-btn"
+              target="_blank"
+              data-lang-key="work.loadMore"
+              >More</a
+            >
+          </div>
+        </div>
+      </main>
+
+      <!-- 오른쪽 빈 사이드바 영역 -->
+      <aside class="sidebar right-sidebar"></aside>
+    </div>
+
+    <!-- JS 파일 경로 수정 -->
+    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/language.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/work.js') }}"></script>
+  </body>
+</html>
