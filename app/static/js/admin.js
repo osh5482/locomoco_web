@@ -78,13 +78,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 언어 탭 전환 기능
+  // 언어 탭 전환 기능 - About 섹션에만 적용
   const tabButtons = document.querySelectorAll(".tab-btn");
 
   tabButtons.forEach((btn) => {
     btn.addEventListener("click", function () {
       // 현재 부모 요소 찾기
       const parentTab = this.closest(".edit-tabs");
+
+      // 부모 탭이 없으면 리턴
+      if (!parentTab) return;
+
+      // Work 관련 페이지인지 확인 (Work 편집 페이지에서는 언어 탭이 없음)
+      const isWorkSection = parentTab.closest("#work-add") !== null;
+      if (isWorkSection) return;
+
       const lang = this.getAttribute("data-lang");
 
       // 같은 그룹의 탭 버튼 비활성화
@@ -105,10 +113,9 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       // 선택한 언어의 콘텐츠만 표시
-      const targetContent =
-        parentTab.parentElement.querySelector(`#about-edit-${lang}`) ||
-        parentTab.parentElement.querySelector(`#work-edit-${lang}`);
-
+      const targetContent = parentTab.parentElement.querySelector(
+        `#about-edit-${lang}`
+      );
       if (targetContent) {
         targetContent.classList.remove("hidden");
       }
