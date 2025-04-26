@@ -52,10 +52,14 @@
   background-color: #333;
 }
 
-.bio-content p {
+.bio-content {
   font-size: 1rem;
   line-height: 1.8;
   color: #444;
+  white-space: pre-line; /* 줄바꿈 유지 */
+}
+
+.bio-content p {
   margin-bottom: 12px;
 }
 
@@ -81,10 +85,14 @@
   background-color: #333;
 }
 
-.desc-content p {
+.desc-content {
   font-size: 1rem;
   line-height: 1.8;
   color: #444;
+  white-space: pre-line; /* 줄바꿈 유지 */
+}
+
+.desc-content p {
   margin-bottom: 12px;
 }
 
@@ -159,8 +167,8 @@
     font-size: 1.4rem;
   }
 
-  .bio-content p,
-  .desc-content p,
+  .bio-content,
+  .desc-content,
   .desc-content li {
     font-size: 0.95rem;
   }
