@@ -18,6 +18,7 @@ app/
 │   │   ├── about.css         # About 페이지 스타일
 │   │   ├── work.css          # Work 페이지 스타일
 │   │   ├── contact.css       # Contact 페이지 스타일
+│   │   ├── work_detail.css   # 작품 상세 페이지 스타일
 │   │   └── admin.css         # 관리자 페이지 스타일
 │   ├── js/
 │   │   ├── main.js           # 메인 자바스크립트
@@ -35,6 +36,7 @@ app/
 └── templates/                # Jinja2 템플릿
     ├── index.html            # 메인 페이지 (About) 템플릿
     ├── work.html             # Work 페이지 템플릿
+    ├── work_detail.html      # 작품 상세 페이지 템플릿
     ├── contact.html          # Contact 페이지 템플릿
     └── admin.html            # 관리자 페이지 템플릿
 ```
@@ -105,21 +107,38 @@ uvicorn app.main:app --reload
 
 > **주의**: 실제 배포 시에는 반드시 사용자 이름과 비밀번호를 변경하고, 환경 변수나 안전한 설정 파일을 통해 관리해야 합니다.
 
-## 관리자 기능
+## 웹사이트 기능
 
-현재 구현된 관리자 기능:
+### 주요 기능
+
+1. **메인 페이지 (About)**: locomoco의 약력과 제작 영상 소개
+2. **작품 목록 페이지 (Work)**: 포트폴리오 작품 그리드 형태로 표시
+3. **작품 상세 페이지 (/work/{id})**: 개별 작품의 상세 정보, 유튜브 임베드, 설명, 관련 작품 표시
+4. **연락처 페이지 (Contact)**: 문의 폼 제공
+
+### 관리자 기능
 
 - **대시보드**: 기본 통계 정보 및 사이트 활동 내역 표시
 - **About 페이지 관리**: 다국어(한국어, 일본어, 영어) 프로필 정보 및 이미지 수정
 - **Work 목록 관리**: 포트폴리오 작업물 추가, 편집, 삭제
+- **다국어 지원**: 한국어, 일본어, 영어 지원
 
 ## API 엔드포인트
 
-- `/api/set-language` - 사용자 언어 설정 변경
-- `/api/admin/about` - About 페이지 콘텐츠 업데이트
-- `/api/admin/profile-image` - 프로필 이미지 업로드
-- `/api/admin/work` - 작품 추가 또는 수정
-- `/api/admin/work/{work_id}` - 작품 삭제
+- **페이지 라우트**:
+
+  - `/` - 메인 페이지 (About)
+  - `/work` - 작품 목록 페이지
+  - `/work/{work_id}` - 작품 상세 페이지
+  - `/contact` - 연락처 페이지
+  - `/admin` - 관리자 페이지
+
+- **API 엔드포인트**:
+  - `/api/set-language` - 사용자 언어 설정 변경
+  - `/api/admin/about` - About 페이지 콘텐츠 업데이트
+  - `/api/admin/profile-image` - 프로필 이미지 업로드
+  - `/api/admin/work` - 작품 추가 또는 수정
+  - `/api/admin/work/{work_id}` - 작품 정보 조회 또는 삭제
 
 ## 기술 스택
 

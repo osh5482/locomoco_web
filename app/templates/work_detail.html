@@ -174,11 +174,22 @@
     <!-- JS 파일 경로 수정 -->
     <script src="{{ url_for('static', path='/js/main.js') }}"></script>
 
-    <!-- translations 객체를 JavaScript로 전달 -->
+    <!-- 번역 데이터를 숨겨진 요소에 저장 -->
+    <div
+      id="translations-data"
+      style="display: none"
+      data-translations="{{ translations|tojson|safe }}"
+      data-lang="{{ current_lang }}"
+    ></div>
+
+    <!-- JavaScript 초기화 -->
     <script>
-      // 서버에서 가져온 번역 데이터를 JavaScript에서 사용할 수 있도록 설정
-      window.serverTranslations = {{ translations|tojson }};
-      window.currentLang = "{{ current_lang }}";
+      // 번역 데이터 요소에서 데이터 가져오기
+      const translationsElement = document.getElementById("translations-data");
+      window.serverTranslations = JSON.parse(
+        translationsElement.dataset.translations
+      );
+      window.currentLang = translationsElement.dataset.lang;
     </script>
     <script src="{{ url_for('static', path='/js/language.js') }}"></script>
   </body>

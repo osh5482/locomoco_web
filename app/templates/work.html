@@ -88,11 +88,7 @@
             {% for work in works %}
             <!-- 작품 항목 {{ loop.index }} -->
             <div class="work-item">
-              <a
-                href="{{ work.youtube_url }}"
-                target="_blank"
-                class="work-link"
-              >
+              <a href="/work/{{ work.id }}" class="work-link">
                 <div class="work-thumbnail">
                   <img
                     src="{{ work.thumbnail_path }}"

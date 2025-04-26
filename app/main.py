@@ -319,6 +319,70 @@ async def work(request: Request, db: Session = Depends(get_db)):
     )
 
 
+@app.get("/work/{work_id}")
+async def work_detail(work_id: int, request: Request, db: Session = Depends(get_db)):
+    """
+    작품 상세 페이지 렌더링
+    """
+    # 현재 언어 설정
+    lang_code = request.cookies.get("preferred_language", "ko")
+
+    # 작품 정보 조회
+    work = db.query(Work).filter(Work.id == work_id).first()
+
+    if not work:
+        # 작품이 존재하지 않으면 목록 페이지로 리다이렉트
+        return RedirectResponse(url="/work", status_code=303)
+
+    # 카테고리 정보 조회
+    category = (
+        db.query(WorkCategory).filter(WorkCategory.id == work.category_id).first()
+    )
+
+    # 관련 작품 조회 (동일 카테고리, 현재 작품 제외, 최대 4개)
+    related_works = (
+        db.query(Work)
+        .filter(
+            Work.category_id == work.category_id,
+            Work.id != work_id,
+            Work.is_active == True,
+        )
+        .order_by(Work.order)
+        .limit(4)
+        .all()
+    )
+
+    # 관련 작품이 4개 미만인 경우 다른 카테고리 작품으로 보충
+    if len(related_works) < 4:
+        more_works = (
+            db.query(Work)
+            .filter(
+                Work.category_id != work.category_id,
+                Work.id != work_id,
+                Work.is_active == True,
+            )
+            .order_by(Work.order)
+            .limit(4 - len(related_works))
+            .all()
+        )
+        related_works.extend(more_works)
+
+    # 언어별 번역 데이터
+    translations = get_translations(db, lang_code)
+
+    return templates.TemplateResponse(
+        "work_detail.html",
+        {
+            "request": request,
+            "work": work,
+            "category": category,
+            "related_works": related_works,
+            "translations": translations,
+            "current_lang": lang_code,
+        },
+    )
+
+
 @app.get("/contact")
 async def contact(request: Request, db: Session = Depends(get_db)):
     """
