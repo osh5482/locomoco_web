@@ -6,39 +6,69 @@
 
 ```
 app/
-├── __init__.py
-├── main.py                   # FastAPI 애플리케이션 진입점
-├── database/                 # 데이터베이스 관련 코드
+├── __init__.py                # 앱 패키지 초기화
+├── main.py                    # FastAPI 애플리케이션 진입점
+├── config.py                  # 설정 관리
+├── database/                  # 데이터베이스 관련 코드
 │   ├── __init__.py
-│   ├── db.py                 # 데이터베이스 연결 및 초기화
-│   └── models.py             # SQLAlchemy 모델
-├── static/                   # 정적 파일 (CSS, JS, 이미지 등)
+│   ├── db.py                  # 데이터베이스 연결
+│   ├── seed.py                # 초기 데이터 생성
+│   └── models/                # 모델 디렉토리
+│       ├── __init__.py
+│       ├── base.py            # 기본 모델 클래스
+│       ├── language.py        # 언어 모델
+│       ├── about.py           # About 페이지 모델
+│       ├── work.py            # 작품 관련 모델
+│       └── stats.py           # 통계 및 로그 모델
+├── routers/                   # 라우터 디렉토리
+│   ├── __init__.py
+│   ├── views.py               # 프론트엔드 페이지 라우트
+│   ├── admin.py               # 관리자 페이지 라우트
+│   └── api/                   # API 라우트
+│       ├── __init__.py
+│       ├── language.py        # 언어 API
+│       └── admin/             # 관리자 API
+│           ├── __init__.py
+│           ├── about.py       # About 페이지 API
+│           ├── work.py        # 작품 API
+│           └── profile.py     # 프로필 이미지 API
+├── services/                  # 서비스 디렉토리
+│   ├── __init__.py
+│   ├── language_service.py    # 언어 서비스
+│   ├── about_service.py       # About 페이지 서비스
+│   ├── work_service.py        # 작품 서비스
+│   └── stats_service.py       # 통계 및 로그 서비스
+├── middleware/                # 미들웨어
+│   ├── __init__.py
+│   └── stats.py               # 방문 통계 미들웨어
+├── utils/                     # 유틸리티
+│   ├── __init__.py
+│   ├── security.py            # 인증 유틸리티
+│   └── file_handling.py       # 파일 처리 유틸리티
+├── static/                    # 정적 파일 (CSS, JS, 이미지 등)
 │   ├── css/
-│   │   ├── main.css          # 메인 스타일시트
-│   │   ├── about.css         # About 페이지 스타일
-│   │   ├── work.css          # Work 페이지 스타일
-│   │   ├── contact.css       # Contact 페이지 스타일
-│   │   ├── work_detail.css   # 작품 상세 페이지 스타일
-│   │   └── admin.css         # 관리자 페이지 스타일
+│   │   ├── main.css           # 메인 스타일시트
+│   │   ├── about.css          # About 페이지 스타일
+│   │   ├── work.css           # Work 페이지 스타일
+│   │   ├── contact.css        # Contact 페이지 스타일
+│   │   ├── work_detail.css    # 작품 상세 페이지 스타일
+│   │   └── admin.css          # 관리자 페이지 스타일
 │   ├── js/
-│   │   ├── main.js           # 메인 자바스크립트
-│   │   ├── language.js       # 다국어 지원 스크립트
-│   │   ├── work.js           # Work 페이지 스크립트
-│   │   ├── contact.js        # Contact 페이지 스크립트
-│   │   └── admin.js          # 관리자 페이지 스크립트
+│   │   ├── main.js            # 메인 자바스크립트
+│   │   ├── language.js        # 다국어 지원 스크립트
+│   │   ├── work.js            # Work 페이지 스크립트
+│   │   ├── contact.js         # Contact 페이지 스크립트
+│   │   └── admin.js           # 관리자 페이지 스크립트
 │   └── assets/
 │       └── images/
-│           ├── profile/
-│           │   └── locomoco_main.jpg  # 프로필 이미지
-│           └── portfolio/
-│               ├── thumb_sample1.jpg  # 포트폴리오 썸네일 샘플
-│               └── thumb_sample2.jpg  # 포트폴리오 썸네일 샘플
-└── templates/                # Jinja2 템플릿
-    ├── index.html            # 메인 페이지 (About) 템플릿
-    ├── work.html             # Work 페이지 템플릿
-    ├── work_detail.html      # 작품 상세 페이지 템플릿
-    ├── contact.html          # Contact 페이지 템플릿
-    └── admin.html            # 관리자 페이지 템플릿
+│           ├── profile/        # 프로필 이미지 디렉토리
+│           └── portfolio/      # 포트폴리오 썸네일 디렉토리
+└── templates/                 # Jinja2 템플릿
+    ├── index.html             # 메인 페이지 (About) 템플릿
+    ├── work.html              # Work 페이지 템플릿
+    ├── work_detail.html       # 작품 상세 페이지 템플릿
+    ├── contact.html           # Contact 페이지 템플릿
+    └── admin.html             # 관리자 페이지 템플릿
 ```
 
 ## 데이터베이스 구조
@@ -73,17 +103,14 @@ app/
 pip install -r requirements.txt
 ```
 
-2. 프로젝트 디렉토리 구조 생성:
+2. 리포지토리 클론:
 
 ```bash
-mkdir -p app/static/{css,js,assets/images/{profile,portfolio}}
-mkdir -p app/templates
-mkdir -p app/database
+git clone https://github.com/yourusername/locomoco-portfolio.git
+cd locomoco-portfolio
 ```
 
-3. 제공된 파일들을 각 디렉토리에 복사
-
-4. 필요한 이미지 파일 준비:
+3. 필요한 이미지 파일 준비:
    - `locomoco_main.jpg` 이미지 파일을 `app/static/assets/images/profile/` 디렉토리에 복사
    - 썸네일 이미지 파일을 `app/static/assets/images/portfolio/` 디렉토리에 복사
 
