@@ -199,6 +199,10 @@ For each video, I strive to create visuals and direction that match the artist's
         {"key": "contact.form.phone", "value": "연락처"},
         {"key": "contact.form.message", "value": "문의 내용"},
         {"key": "contact.form.submit", "value": "전송하기"},
+        {
+            "key": "contact.info",
+            "value": "* 메일은 영업일 기준 24시간 이내에 회신드립니다.",
+        },
     ]
 
     for trans in ko_translations:
@@ -214,11 +218,21 @@ For each video, I strive to create visuals and direction that match the artist's
                 )
             )
 
-    # 일본어, 영어 번역도 필요 시 추가 (약식으로 일부만 추가)
+    # 일본어 번역 데이터 추가
     ja_translations = [
         {"key": "nav.about", "value": "ABOUT"},
         {"key": "nav.work", "value": "WORK"},
         {"key": "nav.contact", "value": "CONTACT"},
+        {"key": "contact.title", "value": "CONTACT"},
+        {"key": "contact.form.name", "value": "名前"},
+        {"key": "contact.form.email", "value": "メールアドレス"},
+        {"key": "contact.form.phone", "value": "連絡先"},
+        {"key": "contact.form.message", "value": "お問い合わせ内容"},
+        {"key": "contact.form.submit", "value": "送信する"},
+        {
+            "key": "contact.info",
+            "value": "* メールは営業日基準で24時間以内に返信いたします。",
+        },
     ]
 
     for trans in ja_translations:
@@ -234,10 +248,21 @@ For each video, I strive to create visuals and direction that match the artist's
                 )
             )
 
+    # 영어 번역 데이터 추가
     en_translations = [
         {"key": "nav.about", "value": "ABOUT"},
         {"key": "nav.work", "value": "WORK"},
         {"key": "nav.contact", "value": "CONTACT"},
+        {"key": "contact.title", "value": "CONTACT"},
+        {"key": "contact.form.name", "value": "Name"},
+        {"key": "contact.form.email", "value": "Email"},
+        {"key": "contact.form.phone", "value": "Phone"},
+        {"key": "contact.form.message", "value": "Message"},
+        {"key": "contact.form.submit", "value": "Submit"},
+        {
+            "key": "contact.info",
+            "value": "* Emails will be responded to within 24 hours on business days.",
+        },
     ]
 
     for trans in en_translations:
