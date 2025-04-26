@@ -469,7 +469,7 @@
 /* Work 관리 스타일 */
 .work-admin-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* 4개 항목으로 변경 */
   gap: 25px;
 }
 
@@ -479,15 +479,26 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-admin-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .work-admin-thumb {
-  height: 160px;
+  height: 0;
+  padding-bottom: 75%; /* 4:3 비율 유지 */
+  position: relative;
   overflow: hidden;
   background-color: #f9f9f9;
 }
 
 .work-admin-thumb img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -533,10 +544,19 @@
 }
 
 /* 반응형 스타일 */
-@media (max-width: 992px) {
-  .dashboard-grid,
+@media (max-width: 1200px) {
   .work-admin-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard-grid {
     grid-template-columns: 1fr;
+  }
+
+  .work-admin-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -571,6 +591,10 @@
   }
 
   .quick-action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-admin-grid {
     grid-template-columns: 1fr;
   }
 }
