@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", function () {
       const workId = this.getAttribute("data-work-id");
 
-      // 작품 정보 가져오기 API 호출 (실제로는 구현 필요)
+      // 작품 정보 가져오기 API 호출
       fetch(`/api/admin/work/${workId}`)
         .then((response) => response.json())
         .then((data) => {
@@ -363,6 +363,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             headerTitle.textContent = "작품 편집";
             submitBtn.textContent = "작품 업데이트";
+
+            // GIF 업로드 섹션 표시
+            const gifSection = document.querySelector("#gif-upload-section");
+            gifSection.classList.remove("hidden");
+
+            // GIF 업로드 폼에 작품 ID 설정
+            document.getElementById("gif-work-id").value = workId;
 
             // 편집 섹션으로 이동
             sections.forEach((section) => {
@@ -439,9 +446,31 @@ document.addEventListener("DOMContentLoaded", function () {
           if (data.status === "success") {
             alert(data.message);
 
-            // Work 목록 페이지로 이동 및 페이지 새로고침
-            window.location.href = "/admin#work-list";
-            window.location.reload();
+            // 새 작품 등록인 경우 GIF 업로드 섹션 표시
+            const workId = formData.get("work_id");
+            if (!workId) {
+              // GIF 업로드 섹션 표시
+              const gifSection = document.querySelector("#gif-upload-section");
+              gifSection.classList.remove("hidden");
+
+              // GIF 업로드 폼에 작품 ID 설정
+              document.getElementById("gif-work-id").value = data.work_id;
+
+              // 작품 ID 필드 업데이트
+              document.getElementById("work-id").value = data.work_id;
+
+              // UI 변경
+              const headerTitle = document.querySelector(
+                "#work-add .admin-header h1"
+              );
+              const submitBtn = document.querySelector("#work-add .save-btn");
+              headerTitle.textContent = "작품 편집";
+              submitBtn.textContent = "작품 업데이트";
+            } else {
+              // 수정 완료 후 목록 페이지로 이동
+              window.location.href = "/admin#work-list";
+              window.location.reload();
+            }
           } else {
             alert("작품 저장 중 오류가 발생했습니다: " + data.message);
           }
@@ -449,6 +478,95 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch((error) => {
           console.error("Error saving work:", error);
           alert("작품 저장 중 오류가 발생했습니다.");
+        });
+    });
+  }
+
+  // GIF 업로드 처리
+  const gifForm = document.getElementById("gif-upload-form");
+  if (gifForm) {
+    // GIF 파일 업로드 미리보기
+    const gifFileInput = document.getElementById("work-gifs");
+    const previewGrid = document.getElementById("gif-preview-grid");
+
+    gifFileInput.addEventListener("change", function (e) {
+      // 미리보기 초기화
+      previewGrid.innerHTML = "";
+
+      // 최대 4개까지만 처리
+      const files = Array.from(this.files).slice(0, 4);
+
+      files.forEach((file, index) => {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const previewItem = document.createElement("div");
+          previewItem.className = "gif-preview-item";
+          previewItem.setAttribute("data-index", index);
+
+          const previewImage = document.createElement("img");
+          previewImage.className = "gif-preview-image";
+          previewImage.src = e.target.result;
+          previewImage.alt = `GIF 미리보기 ${index + 1}`;
+
+          previewItem.appendChild(previewImage);
+          previewGrid.appendChild(previewItem);
+        };
+
+        reader.readAsDataURL(file);
+      });
+    });
+
+    // GIF 폼 제출 처리
+    gifForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const workId = document.getElementById("gif-work-id").value;
+      if (!workId) {
+        alert("작품 ID가 없습니다. 작품을 먼저 저장해주세요.");
+        return;
+      }
+
+      const gifFiles = document.getElementById("work-gifs").files;
+      if (!gifFiles || gifFiles.length === 0) {
+        alert("업로드할 GIF 이미지를 선택해주세요.");
+        return;
+      }
+
+      // 최대 4개까지만 처리
+      if (gifFiles.length > 4) {
+        alert(
+          "최대 4개의 이미지만 업로드할 수 있습니다. 처음 4개만 처리됩니다."
+        );
+      }
+
+      const formData = new FormData();
+
+      // 최대 4개까지만 추가
+      for (let i = 0; i < Math.min(gifFiles.length, 4); i++) {
+        formData.append("gif_files", gifFiles[i]);
+      }
+
+      // API 호출
+      fetch(`/api/admin/work/${workId}/gifs`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === "success") {
+            alert(data.message);
+
+            // 작품 목록 페이지로 이동
+            window.location.href = "/admin#work-list";
+            window.location.reload();
+          } else {
+            alert("GIF 이미지 업로드 중 오류가 발생했습니다: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error uploading GIFs:", error);
+          alert("GIF 이미지 업로드 중 오류가 발생했습니다.");
         });
     });
   }
@@ -484,6 +602,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
       headerTitle.textContent = "새 작품 등록";
       submitBtn.textContent = "작품 등록하기";
+
+      // GIF 섹션 숨기기
+      const gifSection = document.querySelector("#gif-upload-section");
+      if (gifSection) {
+        gifSection.classList.add("hidden");
+      }
+
+      // GIF 미리보기 초기화
+      const previewGrid = document.getElementById("gif-preview-grid");
+      if (previewGrid) {
+        previewGrid.innerHTML = "";
+      }
     }
   }
 

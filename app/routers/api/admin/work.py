@@ -3,14 +3,14 @@ work.py - 작품 관리자 API 라우터
 locomoco 포트폴리오 웹사이트
 """
 
-from typing import Optional
+from typing import Optional, List
 from fastapi import APIRouter, Depends, Form, File, UploadFile, Path
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
 from app.database.db import get_db
 from app.utils.security import get_current_username
-from app.services import get_work_by_id, add_or_update_work, delete_work
+from app.services import get_work_by_id, add_or_update_work, delete_work, add_work_gifs
 
 router = APIRouter()
 
@@ -130,4 +130,27 @@ async def delete_work_api(
         JSONResponse: 삭제 결과
     """
     result = delete_work(db=db, work_id=work_id)
+    return JSONResponse(content=result)
+
+
+@router.post("/work/{work_id}/gifs")
+async def upload_work_gifs_api(
+    work_id: int = Path(...),
+    gif_files: List[UploadFile] = File(...),
+    username: str = Depends(get_current_username),
+    db: Session = Depends(get_db),
+):
+    """
+    작품 GIF 이미지 업로드 API
+
+    Args:
+        work_id: 작품 ID
+        gif_files: GIF 이미지 파일 리스트 (최대 4개)
+        username: 인증된 관리자 사용자명
+        db: 데이터베이스 세션
+
+    Returns:
+        JSONResponse: 업로드 결과
+    """
+    result = add_work_gifs(db=db, work_id=work_id, gif_files=gif_files)
     return JSONResponse(content=result)

@@ -101,6 +101,21 @@
             </p>
           </div>
 
+          <!-- GIF 그리드 영역 (새로 추가) -->
+          {% if gifs %}
+          <div class="work-gif-grid">
+            {% for gif in gifs %}
+            <div class="gif-item">
+              <img
+                src="{{ gif.path }}"
+                alt="작품 GIF {{ gif.position + 1 }}"
+                class="gif-image"
+              />
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
           <!-- 작품 미디어 (유튜브 영상 또는 이미지) -->
           <div class="work-media">
             {% if work.youtube_url %}

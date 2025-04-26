@@ -19,7 +19,7 @@ DEFAULT_CONFIG = {
     "ADMIN_PASSWORD": "admin123",
     # 파일 업로드 설정
     "UPLOAD_DIR": str(BASE_DIR / "app" / "static" / "assets" / "images"),
-    "ALLOWED_EXTENSIONS": [".jpg", ".jpeg", ".png"],
+    "ALLOWED_EXTENSIONS": [".jpg", ".jpeg", ".png", ".gif"],  # .gif 추가
     "MAX_UPLOAD_SIZE": 5 * 1024 * 1024,  # 5MB
     # 언어 설정
     "DEFAULT_LANGUAGE": "ko",
@@ -50,10 +50,13 @@ def get_paths() -> Dict[str, Path]:
     """
     profile_dir = Path(DEFAULT_CONFIG["UPLOAD_DIR"]) / "profile"
     portfolio_dir = Path(DEFAULT_CONFIG["UPLOAD_DIR"]) / "portfolio"
+    # GIF 디렉토리 추가
+    gif_dir = portfolio_dir / "gifs"
 
     # 디렉토리 존재 확인 및 생성
     profile_dir.mkdir(parents=True, exist_ok=True)
     portfolio_dir.mkdir(parents=True, exist_ok=True)
+    gif_dir.mkdir(parents=True, exist_ok=True)  # GIF 디렉토리 생성
 
     return {
         "base_dir": BASE_DIR,

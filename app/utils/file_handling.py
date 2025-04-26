@@ -7,7 +7,7 @@ import os
 import shutil
 from pathlib import Path
 from datetime import datetime
-from typing import Tuple, Optional
+from typing import Tuple, Optional, List
 from fastapi import UploadFile, HTTPException
 import imghdr
 
@@ -37,7 +37,7 @@ def validate_image(file: UploadFile) -> None:
     file.file.seek(0)  # 파일 포인터 원위치
 
     image_type = imghdr.what(None, contents)
-    if image_type not in ["jpeg", "png"]:
+    if image_type not in ["jpeg", "png", "gif"]:
         raise HTTPException(status_code=400, detail="유효한 이미지 파일이 아닙니다.")
 
 
@@ -105,3 +105,63 @@ def save_thumbnail(file: UploadFile, title: Optional[str] = None) -> Tuple[str, 
 
     # 웹에서 접근 가능한 경로 반환
     return filename, f"/static/assets/images/portfolio/{filename}"
+
+
+def save_work_gif(file: UploadFile, work_id: int, position: int) -> Tuple[str, str]:
+    """
+    작품 GIF 이미지 저장
+
+    Args:
+        file: 업로드된 GIF 파일
+        work_id: 작품 ID
+        position: 그리드 위치 (0, 1, 2, 3)
+
+    Returns:
+        tuple: (파일명, 파일 경로)
+    """
+    # 이미지 유효성 검증
+    validate_image(file)
+
+    # 파일 확장자 가져오기 (GIF 또는 다른 이미지 형식 허용)
+    file_ext = os.path.splitext(file.filename)[1].lower()
+
+    # 파일명 생성
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    filename = f"gif_work_{work_id}_pos_{position}_{timestamp}{file_ext}"
+
+    # GIF 디렉토리 확인 및 생성
+    gif_dir = paths["portfolio_dir"] / "gifs"
+    gif_dir.mkdir(parents=True, exist_ok=True)
+
+    file_path = gif_dir / filename
+
+    # 파일 저장
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    # 웹에서 접근 가능한 경로 반환
+    return filename, f"/static/assets/images/portfolio/gifs/{filename}"
+
+
+def save_multiple_work_gifs(
+    files: List[UploadFile], work_id: int
+) -> List[Tuple[str, str, int]]:
+    """
+    여러 개의 GIF 이미지 저장
+
+    Args:
+        files: 업로드된 GIF 파일 리스트
+        work_id: 작품 ID
+
+    Returns:
+        list: [(파일명, 파일 경로, 위치 인덱스)] 형태의 리스트
+    """
+    results = []
+
+    # 최대 4개까지만 처리
+    for i, file in enumerate(files[:4]):
+        if file and file.filename:
+            filename, path = save_work_gif(file, work_id, i)
+            results.append((filename, path, i))
+
+    return results

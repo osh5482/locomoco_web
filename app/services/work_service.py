@@ -3,13 +3,13 @@ work_service.py - 작품 관련 서비스
 locomoco 포트폴리오 웹사이트
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime
 from sqlalchemy.orm import Session
 from fastapi import UploadFile, HTTPException
 
-from app.database.models import Work, WorkCategory, ActivityLog
-from app.utils.file_handling import save_thumbnail
+from app.database.models import Work, WorkCategory, WorkGif, ActivityLog
+from app.utils.file_handling import save_thumbnail, save_multiple_work_gifs
 
 
 def get_all_works(db: Session, active_only: bool = False) -> List[Work]:
@@ -43,6 +43,25 @@ def get_work_by_id(db: Session, work_id: int) -> Optional[Work]:
         Work: 작품 모델
     """
     return db.query(Work).filter(Work.id == work_id).first()
+
+
+def get_work_gifs(db: Session, work_id: int) -> List[WorkGif]:
+    """
+    작품의 GIF 이미지 조회
+
+    Args:
+        db: 데이터베이스 세션
+        work_id: 작품 ID
+
+    Returns:
+        list: 작품 GIF 목록
+    """
+    return (
+        db.query(WorkGif)
+        .filter(WorkGif.work_id == work_id)
+        .order_by(WorkGif.position)
+        .all()
+    )
 
 
 def get_related_works(db: Session, work_id: int, limit: int = 4) -> List[Work]:
@@ -119,7 +138,15 @@ def get_work_detail(db: Session, work_id: int) -> Dict[str, Any]:
     # 관련 작품 조회
     related_works = get_related_works(db, work_id)
 
-    return {"work": work, "category": category, "related_works": related_works}
+    # GIF 이미지 조회
+    gifs = get_work_gifs(db, work_id)
+
+    return {
+        "work": work,
+        "category": category,
+        "related_works": related_works,
+        "gifs": gifs,
+    }
 
 
 def add_or_update_work(
@@ -265,7 +292,7 @@ def delete_work(db: Session, work_id: int) -> Dict[str, Any]:
         # 작품 제목 저장 (로그용)
         work_title = work.title
 
-        # 작품 삭제
+        # 작품 삭제 (관련된 GIF 이미지도 cascade로 삭제됨)
         db.delete(work)
 
         # 활동 로그 기록
@@ -280,6 +307,66 @@ def delete_work(db: Session, work_id: int) -> Dict[str, Any]:
         db.commit()
 
         return {"status": "success", "message": "작품이 삭제되었습니다."}
+
+    except HTTPException:
+        db.rollback()
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"오류가 발생했습니다: {str(e)}")
+
+
+def add_work_gifs(
+    db: Session, work_id: int, gif_files: List[UploadFile]
+) -> Dict[str, Any]:
+    """
+    작품에 GIF 이미지 추가
+
+    Args:
+        db: 데이터베이스 세션
+        work_id: 작품 ID
+        gif_files: GIF 이미지 파일 리스트 (최대 4개)
+
+    Returns:
+        dict: 응답 메시지
+    """
+    try:
+        # 작품 존재 여부 확인
+        work = get_work_by_id(db, work_id)
+        if not work:
+            raise HTTPException(status_code=404, detail="해당 작품을 찾을 수 없습니다.")
+
+        # 기존 GIF 이미지 삭제
+        db.query(WorkGif).filter(WorkGif.work_id == work_id).delete()
+
+        # 새 GIF 이미지 저장
+        saved_gifs = save_multiple_work_gifs(gif_files, work_id)
+
+        # 데이터베이스에 저장
+        for filename, path, position in saved_gifs:
+            gif = WorkGif(
+                work_id=work_id, filename=filename, path=path, position=position
+            )
+            db.add(gif)
+
+        # 활동 로그 기록
+        log = ActivityLog(
+            action="update",
+            entity_type="work_gif",
+            entity_id=work_id,
+            description=f"작품 '{work.title}'의 GIF 이미지 {len(saved_gifs)}개 업데이트",
+        )
+        db.add(log)
+
+        db.commit()
+
+        return {
+            "status": "success",
+            "message": f"GIF 이미지 {len(saved_gifs)}개가 추가되었습니다.",
+            "gifs": [
+                {"position": position, "path": path} for _, path, position in saved_gifs
+            ],
+        }
 
     except HTTPException:
         db.rollback()

@@ -16,6 +16,7 @@ from app.services.work_service import (
     get_work_detail,
     add_or_update_work,
     delete_work,
+    add_work_gifs,
 )
 from app.services.stats_service import (
     get_dashboard_stats,
@@ -39,6 +40,7 @@ __all__ = [
     "get_work_detail",
     "add_or_update_work",
     "delete_work",
+    "add_work_gifs",
     # stats_service
     "get_dashboard_stats",
     "get_visit_stats",

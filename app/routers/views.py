@@ -105,6 +105,7 @@ async def work_detail(work_id: int, request: Request, db: Session = Depends(get_
             "work": detail["work"],
             "category": detail["category"],
             "related_works": detail["related_works"],
+            "gifs": detail["gifs"],  # GIF 이미지 목록 전달
             "translations": translations,
             "current_lang": lang_code,
         },
