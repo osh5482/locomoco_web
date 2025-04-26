@@ -7,20 +7,24 @@
 ```
 app/
 ├── __init__.py
-├── main.py                # FastAPI 애플리케이션 진입점
-├── static/                # 정적 파일 (CSS, JS, 이미지 등)
+├── main.py                   # FastAPI 애플리케이션 진입점
+├── database/                 # 데이터베이스 관련 코드
+│   ├── __init__.py
+│   ├── db.py                 # 데이터베이스 연결 및 초기화
+│   └── models.py             # SQLAlchemy 모델
+├── static/                   # 정적 파일 (CSS, JS, 이미지 등)
 │   ├── css/
-│   │   ├── main.css       # 메인 스타일시트
-│   │   ├── about.css      # About 페이지 스타일
-│   │   ├── work.css       # Work 페이지 스타일
-│   │   ├── contact.css    # Contact 페이지 스타일
-│   │   └── admin.css      # 관리자 페이지 스타일
+│   │   ├── main.css          # 메인 스타일시트
+│   │   ├── about.css         # About 페이지 스타일
+│   │   ├── work.css          # Work 페이지 스타일
+│   │   ├── contact.css       # Contact 페이지 스타일
+│   │   └── admin.css         # 관리자 페이지 스타일
 │   ├── js/
-│   │   ├── main.js        # 메인 자바스크립트
-│   │   ├── language.js    # 다국어 지원 스크립트
-│   │   ├── work.js        # Work 페이지 스크립트
-│   │   ├── contact.js     # Contact 페이지 스크립트
-│   │   └── admin.js       # 관리자 페이지 스크립트
+│   │   ├── main.js           # 메인 자바스크립트
+│   │   ├── language.js       # 다국어 지원 스크립트
+│   │   ├── work.js           # Work 페이지 스크립트
+│   │   ├── contact.js        # Contact 페이지 스크립트
+│   │   └── admin.js          # 관리자 페이지 스크립트
 │   └── assets/
 │       └── images/
 │           ├── profile/
@@ -28,12 +32,25 @@ app/
 │           └── portfolio/
 │               ├── thumb_sample1.jpg  # 포트폴리오 썸네일 샘플
 │               └── thumb_sample2.jpg  # 포트폴리오 썸네일 샘플
-└── templates/             # Jinja2 템플릿
-    ├── index.html         # 메인 페이지 (About) 템플릿
-    ├── work.html          # Work 페이지 템플릿
-    ├── contact.html       # Contact 페이지 템플릿
-    └── admin.html         # 관리자 페이지 템플릿
+└── templates/                # Jinja2 템플릿
+    ├── index.html            # 메인 페이지 (About) 템플릿
+    ├── work.html             # Work 페이지 템플릿
+    ├── contact.html          # Contact 페이지 템플릿
+    └── admin.html            # 관리자 페이지 템플릿
 ```
+
+## 데이터베이스 구조
+
+이 프로젝트는 SQLite와 SQLAlchemy를 사용하여 다음과 같은 데이터베이스 테이블을 관리합니다:
+
+1. `languages` - 지원하는 언어 정보 (한국어, 일본어, 영어)
+2. `about_contents` - About 페이지의 다국어 콘텐츠
+3. `profile_images` - 프로필 이미지 관리
+4. `work_categories` - 작품 카테고리 (커버 영상, 쇼츠 등)
+5. `works` - 포트폴리오 작품 정보
+6. `ui_translations` - UI 텍스트의 다국어 번역
+7. `site_stats` - 사이트 방문 통계
+8. `activity_logs` - 관리자 활동 로그
 
 ## 설치 및 실행 방법
 
@@ -41,6 +58,7 @@ app/
 
 - Python 3.8 이상
 - FastAPI
+- SQLAlchemy
 - Uvicorn
 - Jinja2
 - Python-multipart (파일 업로드용)
@@ -58,14 +76,10 @@ pip install -r requirements.txt
 ```bash
 mkdir -p app/static/{css,js,assets/images/{profile,portfolio}}
 mkdir -p app/templates
+mkdir -p app/database
 ```
 
-3. 제공된 파일들을 각 디렉토리에 복사:
-
-   - `main.py` → app/ 디렉토리
-   - `index.html`, `admin.html` → app/templates/ 디렉토리
-   - `main.css`, `about.css`, `admin.css` → app/static/css/ 디렉토리
-   - `main.js`, `language.js`, `admin.js` → app/static/js/ 디렉토리
+3. 제공된 파일들을 각 디렉토리에 복사
 
 4. 필요한 이미지 파일 준비:
    - `locomoco_main.jpg` 이미지 파일을 `app/static/assets/images/profile/` 디렉토리에 복사
@@ -95,29 +109,33 @@ uvicorn app.main:app --reload
 
 현재 구현된 관리자 기능:
 
-- **대시보드**: 기본 통계 정보 표시
-- **About 페이지 관리**: 프로필 정보 및 이미지 수정
-- **Work 목록 관리**: 포트폴리오 작업물 관리
-- **다국어 컨텐츠 관리**: 한국어, 일본어, 영어 지원
+- **대시보드**: 기본 통계 정보 및 사이트 활동 내역 표시
+- **About 페이지 관리**: 다국어(한국어, 일본어, 영어) 프로필 정보 및 이미지 수정
+- **Work 목록 관리**: 포트폴리오 작업물 추가, 편집, 삭제
+
+## API 엔드포인트
+
+- `/api/set-language` - 사용자 언어 설정 변경
+- `/api/admin/about` - About 페이지 콘텐츠 업데이트
+- `/api/admin/profile-image` - 프로필 이미지 업로드
+- `/api/admin/work` - 작품 추가 또는 수정
+- `/api/admin/work/{work_id}` - 작품 삭제
 
 ## 기술 스택
 
-- **백엔드**: FastAPI, Python 3.8+
+- **백엔드**: FastAPI, Python 3.8+, SQLAlchemy, SQLite
 - **프론트엔드**: HTML, CSS, JavaScript
 - **템플릿 엔진**: Jinja2
-- **데이터베이스**: SQLite (추후 구현 예정)
-- **인증**: HTTP Basic Authentication (임시, 추후 개선 예정)
+- **인증**: HTTP Basic Authentication
 
 ## 추가 구현 예정 기능
 
-1. **데이터베이스 연동**: SQLite를 사용한 콘텐츠 관리
-2. **파일 업로드 기능**: 이미지 및 비디오 파일 관리
-3. **OAuth 인증**: 더 안전한 관리자 인증 시스템
-4. **Work 페이지 구현**: 포트폴리오 작업물 표시
-5. **Contact 페이지 구현**: 연락처 및 문의 양식
-6. **다국어 지원 완성**: 한국어, 일본어, 영어 텍스트 번역 데이터 구현
-7. **통계 기능**: 방문자 추적 및 인기 콘텐츠 분석
+1. **OAuth 인증**: 더 안전한 관리자 인증 시스템
+2. **파일 관리 개선**: 이미지 크기 최적화 및 포맷 변환
+3. **통계 기능 확장**: 상세 방문자 분석 및 인기 콘텐츠 분석
+4. **작품 순서 변경**: 드래그 앤 드롭으로 작품 표시 순서 변경
+5. **백업 및 복원**: 데이터베이스 백업 및 복원 기능
 
 ## 참고 사항
 
-현재 버전은 기본적인 WYSIWYG 관리자 기능만 구현되어 있으며, 데이터베이스 연동 및 실제 데이터 저장 기능은 추후 업데이트될 예정입니다.
+이 프로젝트는 WYSIWYG 방식의 관리자 기능을 제공하여 코딩 지식 없이도 웹사이트 콘텐츠를 쉽게 관리할 수 있습니다.

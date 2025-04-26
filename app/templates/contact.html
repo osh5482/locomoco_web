@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="{{ current_lang }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,11 +25,19 @@
         <nav class="main-nav">
           <ul>
             <li>
-              <a href="/" data-lang-key="nav.about">ABOUT</a>
+              <a href="/" data-lang-key="nav.about"
+                >{{ translations.get('nav.about', 'ABOUT') }}</a
+              >
             </li>
-            <li><a href="/work" data-lang-key="nav.work">WORK</a></li>
+            <li>
+              <a href="/work" data-lang-key="nav.work"
+                >{{ translations.get('nav.work', 'WORK') }}</a
+              >
+            </li>
             <li class="active">
-              <a href="/contact" data-lang-key="nav.contact">CONTACT</a>
+              <a href="/contact" data-lang-key="nav.contact"
+                >{{ translations.get('nav.contact', 'CONTACT') }}</a
+              >
             </li>
           </ul>
         </nav>
@@ -37,9 +45,30 @@
         <!-- 네비게이션 아래 언어 선택 -->
         <div class="language-selector">
           <ul>
-            <li><button class="lang-btn active" data-lang="ko">KO</button></li>
-            <li><button class="lang-btn" data-lang="ja">JP</button></li>
-            <li><button class="lang-btn" data-lang="en">EN</button></li>
+            <li>
+              <button
+                class="lang-btn {% if current_lang == 'ko' %}active{% endif %}"
+                data-lang="ko"
+              >
+                KO
+              </button>
+            </li>
+            <li>
+              <button
+                class="lang-btn {% if current_lang == 'ja' %}active{% endif %}"
+                data-lang="ja"
+              >
+                JP
+              </button>
+            </li>
+            <li>
+              <button
+                class="lang-btn {% if current_lang == 'en' %}active{% endif %}"
+                data-lang="en"
+              >
+                EN
+              </button>
+            </li>
           </ul>
         </div>
       </aside>
@@ -48,33 +77,38 @@
       <main class="main-content">
         <div class="contact-content">
           <div class="contact-header">
-            <h1 data-lang-key="contact.title">CONTACT</h1>
+            <h1 data-lang-key="contact.title">
+              {{ translations.get('contact.title', 'CONTACT') }}
+            </h1>
           </div>
 
           <div class="contact-form-container">
             <form class="contact-form" id="contactForm">
               <div class="form-group">
-                <label for="name" data-lang-key="contact.form.name">이름</label>
+                <label for="name" data-lang-key="contact.form.name"
+                  >{{ translations.get('contact.form.name', '이름') }}</label
+                >
                 <input type="text" id="name" name="name" required />
               </div>
 
               <div class="form-group">
                 <label for="email" data-lang-key="contact.form.email"
-                  >이메일</label
+                  >{{ translations.get('contact.form.email', '이메일') }}</label
                 >
                 <input type="email" id="email" name="email" required />
               </div>
 
               <div class="form-group">
                 <label for="phone" data-lang-key="contact.form.phone"
-                  >연락처</label
+                  >{{ translations.get('contact.form.phone', '연락처') }}</label
                 >
                 <input type="tel" id="phone" name="phone" />
               </div>
 
               <div class="form-group">
                 <label for="message" data-lang-key="contact.form.message"
-                  >문의 내용</label
+                  >{{ translations.get('contact.form.message', '문의 내용')
+                  }}</label
                 >
                 <textarea
                   id="message"
@@ -90,14 +124,17 @@
                   class="submit-btn"
                   data-lang-key="contact.form.submit"
                 >
-                  전송하기
+                  {{ translations.get('contact.form.submit', '전송하기') }}
                 </button>
               </div>
             </form>
           </div>
 
           <div class="contact-information">
-            <p>* 메일은 영업일 기준 24시간 이내에 회신드립니다.</p>
+            <p>
+              {{ translations.get('contact.info', '* 메일은 영업일 기준 24시간
+              이내에 회신드립니다.') }}
+            </p>
           </div>
         </div>
       </main>

@@ -39,7 +39,7 @@
 
         <!-- 하단 정보 -->
         <div class="admin-info">
-          <p>관리자: locomoco</p>
+          <p>관리자: {{ username }}</p>
           <button class="exit-admin-btn">관리자 모드 종료</button>
         </div>
       </aside>
@@ -61,21 +61,15 @@
               <div class="card-content">
                 <div class="stat-summary">
                   <div class="stat-box">
-                    <span class="stat-number">6</span>
+                    <span class="stat-number">{{ total_works }}</span>
                     <span class="stat-label">총 작품</span>
                   </div>
+                  {% for stat in category_stats %}
                   <div class="stat-box">
-                    <span class="stat-number">2</span>
-                    <span class="stat-label">커버 영상</span>
+                    <span class="stat-number">{{ stat.count }}</span>
+                    <span class="stat-label">{{ stat.name }}</span>
                   </div>
-                  <div class="stat-box">
-                    <span class="stat-number">1</span>
-                    <span class="stat-label">쇼츠</span>
-                  </div>
-                  <div class="stat-box">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">기타</span>
-                  </div>
+                  {% endfor %}
                 </div>
               </div>
             </div>
@@ -88,27 +82,11 @@
               <div class="card-content">
                 <div class="chart-container">
                   <div class="simple-chart">
-                    <div class="chart-bar" style="height: 30%">
-                      <span>월</span>
+                    {% for visit in visits_by_day %}
+                    <div class="chart-bar visit-bar" data-count="{{ visit.count }}">
+                      <span>{{ visit.day }}</span>
                     </div>
-                    <div class="chart-bar" style="height: 45%">
-                      <span>화</span>
-                    </div>
-                    <div class="chart-bar" style="height: 60%">
-                      <span>수</span>
-                    </div>
-                    <div class="chart-bar" style="height: 40%">
-                      <span>목</span>
-                    </div>
-                    <div class="chart-bar" style="height: 80%">
-                      <span>금</span>
-                    </div>
-                    <div class="chart-bar" style="height: 70%">
-                      <span>토</span>
-                    </div>
-                    <div class="chart-bar" style="height: 50%">
-                      <span>일</span>
-                    </div>
+                    {% endfor %}
                   </div>
                   <p class="chart-caption">최근 7일 방문자 추이</p>
                 </div>
@@ -122,18 +100,12 @@
               </div>
               <div class="card-content">
                 <ul class="update-list">
+                  {% for activity in recent_activities %}
                   <li class="update-item">
-                    <span class="update-date">2025.04.15</span>
-                    <span class="update-content">'작품 제목 1' 등록</span>
+                    <span class="update-date">{{ activity.created_at.strftime('%Y.%m.%d') }}</span>
+                    <span class="update-content">{{ activity.description }}</span>
                   </li>
-                  <li class="update-item">
-                    <span class="update-date">2025.04.12</span>
-                    <span class="update-content">'작품 제목 2' 편집</span>
-                  </li>
-                  <li class="update-item">
-                    <span class="update-date">2025.04.10</span>
-                    <span class="update-content">About 페이지 업데이트</span>
-                  </li>
+                  {% endfor %}
                 </ul>
               </div>
             </div>
@@ -180,162 +152,188 @@
           </div>
 
           <div class="tab-content" id="about-edit-ko">
-            <div class="form-group">
-              <label for="biography-title-ko">약력 제목</label>
-              <input
-                type="text"
-                id="biography-title-ko"
-                value="약력"
-                class="admin-input"
-              />
-            </div>
+            <form id="about-form-ko" class="about-edit-form">
+              <input type="hidden" name="lang_code" value="ko">
+              <div class="form-group">
+                <label for="biography-title-ko">약력 제목</label>
+                <input
+                  type="text"
+                  id="biography-title-ko"
+                  name="biography_title"
+                  value="{{ about_contents.ko.biography_title }}"
+                  class="admin-input"
+                />
+              </div>
 
-            <div class="form-group">
-              <label for="biography-content-ko">약력 내용</label>
-              <textarea
-                id="biography-content-ko"
-                class="admin-textarea"
-                rows="6"
-              >
-안녕하세요, locomoco입니다.
+              <div class="form-group">
+                <label for="biography-content-ko">약력 내용</label>
+                <textarea
+                  id="biography-content-ko"
+                  name="biography_content"
+                  class="admin-textarea"
+                  rows="6"
+                >{{ about_contents.ko.biography_content }}</textarea>
+              </div>
 
-저는 다양한 장르의 커버 영상과 창작 영상을 제작하는 프리랜서 크리에이터입니다.
+              <div class="form-group">
+                <label for="video-desc-title-ko">제작 영상 소개 제목</label>
+                <input
+                  type="text"
+                  id="video-desc-title-ko"
+                  name="video_desc_title"
+                  value="{{ about_contents.ko.video_desc_title }}"
+                  class="admin-input"
+                />
+              </div>
 
-2018년부터 유튜브를 통해 작업물을 공유해왔으며, 특히 감성적인 영상 연출에 큰 관심을 가지고 있습니다.
+              <div class="form-group">
+                <label for="video-desc-content-ko">제작 영상 소개 내용</label>
+                <textarea
+                  id="video-desc-content-ko"
+                  name="video_desc_content"
+                  class="admin-textarea"
+                  rows="8"
+                >{{ about_contents.ko.video_desc_content }}</textarea>
+              </div>
 
-현재까지 다양한 아티스트와 협업하여 50개 이상의 프로젝트를 완료했습니다.</textarea
-              >
-            </div>
-
-            <div class="form-group">
-              <label for="video-desc-title-ko">제작 영상 소개 제목</label>
-              <input
-                type="text"
-                id="video-desc-title-ko"
-                value="제작 영상 소개"
-                class="admin-input"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="video-desc-content-ko">제작 영상 소개 내용</label>
-              <textarea
-                id="video-desc-content-ko"
-                class="admin-textarea"
-                rows="8"
-              >
-제가 주로 제작하는 영상은 다음과 같습니다:
-
-• 노래 커버 영상 (뮤직비디오 스타일)
-• 짧은 형식의 콘텐츠 (Youtube Shorts)
-• 아티스트 프로모션 영상
-• 감성적인 스토리텔링 영상
-
-각 영상마다 아티스트의 개성과 곡의 분위기에 맞는 색감과 연출을 추구합니다.</textarea
-              >
-            </div>
-
-            <div class="form-group">
-              <label for="profile-image">프로필 이미지</label>
-              <div class="image-upload-container">
-                <div class="current-image">
-                  <img
-                    src="{{ url_for('static', path='/assets/images/profile/locomoco_main.jpg') }}"
-                    alt="현재 프로필"
-                    class="preview-image"
-                  />
-                  <p>현재 이미지</p>
-                </div>
-                <div class="upload-box">
-                  <input
-                    type="file"
-                    id="profile-image"
-                    class="file-input"
-                    accept="image/*"
-                  />
-                  <label for="profile-image" class="upload-label">
-                    <span class="upload-icon">+</span>
-                    <span class="upload-text">이미지 변경</span>
-                  </label>
+              <div class="form-group">
+                <label for="profile-image">프로필 이미지</label>
+                <div class="image-upload-container">
+                  <div class="current-image">
+                    <img
+                      src="{{ profile_image.path }}"
+                      alt="현재 프로필"
+                      class="preview-image"
+                    />
+                    <p>현재 이미지</p>
+                  </div>
+                  <div class="upload-box">
+                    <input
+                      type="file"
+                      id="profile-image"
+                      name="profile_image"
+                      class="file-input"
+                      accept="image/*"
+                    />
+                    <label for="profile-image" class="upload-label">
+                      <span class="upload-icon">+</span>
+                      <span class="upload-text">이미지 변경</span>
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="form-actions">
-              <button class="admin-btn save-btn">저장하기</button>
-              <button class="admin-btn cancel-btn">취소</button>
-            </div>
+              <div class="form-actions">
+                <button type="submit" class="admin-btn save-btn">저장하기</button>
+                <button type="button" class="admin-btn cancel-btn">취소</button>
+              </div>
+            </form>
           </div>
 
-          <!-- 일본어, 영어 탭 내용은 생략 (한국어와 유사한 구조) -->
+          <!-- 일본어 About 페이지 관리 -->
           <div class="tab-content hidden" id="about-edit-ja">
-            <!-- 일본어 내용 관리 (구조는 동일) -->
-            <div class="form-group">
-              <label for="biography-title-ja">経歴 タイトル</label>
-              <input
-                type="text"
-                id="biography-title-ja"
-                value="経歴"
-                class="admin-input"
-              />
-            </div>
+            <form id="about-form-ja" class="about-edit-form">
+              <input type="hidden" name="lang_code" value="ja">
+              <div class="form-group">
+                <label for="biography-title-ja">経歴 タイトル</label>
+                <input
+                  type="text"
+                  id="biography-title-ja"
+                  name="biography_title"
+                  value="{{ about_contents.ja.biography_title }}"
+                  class="admin-input"
+                />
+              </div>
 
-            <div class="form-group">
-              <label for="biography-content-ja">経歴 内容</label>
-              <textarea
-                id="biography-content-ja"
-                class="admin-textarea"
-                rows="6"
-              >
-こんにちは、locomocoです。
+              <div class="form-group">
+                <label for="biography-content-ja">経歴 内容</label>
+                <textarea
+                  id="biography-content-ja"
+                  name="biography_content"
+                  class="admin-textarea"
+                  rows="6"
+                >{{ about_contents.ja.biography_content }}</textarea>
+              </div>
 
-私は様々なジャンルのカバー映像と創作映像を制作するフリーランスクリエイターです。
+              <div class="form-group">
+                <label for="video-desc-title-ja">制作映像紹介タイトル</label>
+                <input
+                  type="text"
+                  id="video-desc-title-ja"
+                  name="video_desc_title"
+                  value="{{ about_contents.ja.video_desc_title }}"
+                  class="admin-input"
+                />
+              </div>
 
-2018年からYouTubeを通じて作品を共有してきており、特に感性的な映像演出に大きな関心を持っています。
+              <div class="form-group">
+                <label for="video-desc-content-ja">制作映像紹介内容</label>
+                <textarea
+                  id="video-desc-content-ja"
+                  name="video_desc_content"
+                  class="admin-textarea"
+                  rows="8"
+                >{{ about_contents.ja.video_desc_content }}</textarea>
+              </div>
 
-現在まで様々なアーティストとコラボレーションし、50以上のプロジェクトを完了しました。</textarea
-              >
-            </div>
-
-            <div class="form-actions">
-              <button class="admin-btn save-btn">保存</button>
-              <button class="admin-btn cancel-btn">キャンセル</button>
-            </div>
+              <div class="form-actions">
+                <button type="submit" class="admin-btn save-btn">保存</button>
+                <button type="button" class="admin-btn cancel-btn">キャンセル</button>
+              </div>
+            </form>
           </div>
 
+          <!-- 영어 About 페이지 관리 -->
           <div class="tab-content hidden" id="about-edit-en">
-            <!-- 영어 내용 관리 (구조는 동일) -->
-            <div class="form-group">
-              <label for="biography-title-en">Biography Title</label>
-              <input
-                type="text"
-                id="biography-title-en"
-                value="Biography"
-                class="admin-input"
-              />
-            </div>
+            <form id="about-form-en" class="about-edit-form">
+              <input type="hidden" name="lang_code" value="en">
+              <div class="form-group">
+                <label for="biography-title-en">Biography Title</label>
+                <input
+                  type="text"
+                  id="biography-title-en"
+                  name="biography_title"
+                  value="{{ about_contents.en.biography_title }}"
+                  class="admin-input"
+                />
+              </div>
 
-            <div class="form-group">
-              <label for="biography-content-en">Biography Content</label>
-              <textarea
-                id="biography-content-en"
-                class="admin-textarea"
-                rows="6"
-              >
-Hello, I'm locomoco.
+              <div class="form-group">
+                <label for="biography-content-en">Biography Content</label>
+                <textarea
+                  id="biography-content-en"
+                  name="biography_content"
+                  class="admin-textarea"
+                  rows="6"
+                >{{ about_contents.en.biography_content }}</textarea>
+              </div>
 
-I'm a freelance creator who produces cover videos and original content across various genres.
+              <div class="form-group">
+                <label for="video-desc-title-en">Video Introduction Title</label>
+                <input
+                  type="text"
+                  id="video-desc-title-en"
+                  name="video_desc_title"
+                  value="{{ about_contents.en.video_desc_title }}"
+                  class="admin-input"
+                />
+              </div>
 
-I've been sharing my work on YouTube since 2018, with a particular interest in emotional visual direction.
+              <div class="form-group">
+                <label for="video-desc-content-en">Video Introduction Content</label>
+                <textarea
+                  id="video-desc-content-en"
+                  name="video_desc_content"
+                  class="admin-textarea"
+                  rows="8"
+                >{{ about_contents.en.video_desc_content }}</textarea>
+              </div>
 
-To date, I've completed over 50 projects in collaboration with various artists.</textarea
-              >
-            </div>
-
-            <div class="form-actions">
-              <button class="admin-btn save-btn">Save</button>
-              <button class="admin-btn cancel-btn">Cancel</button>
-            </div>
+              <div class="form-actions">
+                <button type="submit" class="admin-btn save-btn">Save</button>
+                <button type="button" class="admin-btn cancel-btn">Cancel</button>
+              </div>
+            </form>
           </div>
         </section>
 
@@ -347,47 +345,30 @@ To date, I've completed over 50 projects in collaboration with various artists.<
           </div>
 
           <div class="work-admin-grid">
-            <!-- 작품 항목 1 -->
-            <div class="work-admin-item">
+            {% for work in works %}
+            <!-- 작품 항목 {{ loop.index }} -->
+            <div class="work-admin-item" data-work-id="{{ work.id }}">
               <div class="work-admin-thumb">
                 <img
-                  src="{{ url_for('static', path='/assets/images/portfolio/thumb_sample1.jpg') }}"
-                  alt="작품 1"
+                  src="{{ work.thumbnail_path }}"
+                  alt="{{ work.title }}"
                 />
               </div>
               <div class="work-admin-info">
-                <h3>작품 제목 1</h3>
-                <p>의뢰인: 아티스트명</p>
-                <p>제작: 2024년</p>
+                <h3>{{ work.title }}</h3>
+                <p>의뢰인: {{ work.artist }}</p>
+                <p>제작: {{ work.year }}년</p>
               </div>
               <div class="work-admin-actions">
-                <button class="admin-btn edit-btn">편집</button>
-                <button class="admin-btn delete-btn">삭제</button>
+                <button class="admin-btn edit-btn" data-work-id="{{ work.id }}">편집</button>
+                <button class="admin-btn delete-btn" data-work-id="{{ work.id }}">삭제</button>
               </div>
             </div>
-
-            <!-- 작품 항목 2 -->
-            <div class="work-admin-item">
-              <div class="work-admin-thumb">
-                <img
-                  src="{{ url_for('static', path='/assets/images/portfolio/thumb_sample2.jpg') }}"
-                  alt="작품 2"
-                />
-              </div>
-              <div class="work-admin-info">
-                <h3>작품 제목 2</h3>
-                <p>의뢰인: 아티스트명</p>
-                <p>제작: 2023년</p>
-              </div>
-              <div class="work-admin-actions">
-                <button class="admin-btn edit-btn">편집</button>
-                <button class="admin-btn delete-btn">삭제</button>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </section>
 
-        <!-- Work 관리 섹션 - 추가/편집 (언어 탭 제거) -->
+        <!-- Work 관리 섹션 - 추가/편집 -->
         <section id="work-add" class="admin-section">
           <div class="admin-header">
             <h1>새 작품 등록</h1>
@@ -396,96 +377,107 @@ To date, I've completed over 50 projects in collaboration with various artists.<
             </button>
           </div>
 
-          <!-- 언어 탭 제거 -->
-
           <div class="tab-content" id="work-edit">
-            <div class="form-group">
-              <label for="work-title">작품 제목</label>
-              <input
-                type="text"
-                id="work-title"
-                placeholder="작품 제목을 입력하세요"
-                class="admin-input"
-                required
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="work-artist">의뢰인/아티스트</label>
-              <input
-                type="text"
-                id="work-artist"
-                placeholder="의뢰인 또는 아티스트 이름"
-                class="admin-input"
-              />
-            </div>
-
-            <div class="form-row">
-              <div class="form-group half">
-                <label for="work-style">영상 스타일</label>
-                <select id="work-style" class="admin-select">
-                  <option value="cover">커버 영상</option>
-                  <option value="shorts">쇼츠</option>
-                  <option value="promotion">프로모션</option>
-                  <option value="story">스토리텔링</option>
-                </select>
-              </div>
-
-              <div class="form-group half">
-                <label for="work-year">제작 연도</label>
-                <select id="work-year" class="admin-select">
-                  <option value="2025">2025</option>
-                  <option value="2024" selected>2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                  <option value="2021">2021</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="work-youtube">유튜브 URL</label>
-              <input
-                type="text"
-                id="work-youtube"
-                placeholder="https://www.youtube.com/watch?v=..."
-                class="admin-input"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="work-thumbnail">썸네일 이미지</label>
-              <div class="upload-box large-upload">
+            <form id="work-form" class="work-edit-form">
+              <input type="hidden" id="work-id" name="work_id" value="">
+              
+              <div class="form-group">
+                <label for="work-title">작품 제목</label>
                 <input
-                  type="file"
-                  id="work-thumbnail"
-                  class="file-input"
-                  accept="image/*"
+                  type="text"
+                  id="work-title"
+                  name="title"
+                  placeholder="작품 제목을 입력하세요"
+                  class="admin-input"
+                  required
                 />
-                <label for="work-thumbnail" class="upload-label">
-                  <span class="upload-icon">+</span>
-                  <span class="upload-text">썸네일 업로드</span>
-                  <span class="upload-hint">권장 비율: 4:3, JPG 또는 PNG</span>
-                </label>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="work-desc">작품 상세 설명</label>
-              <textarea
-                id="work-desc"
-                class="admin-textarea"
-                rows="5"
-                placeholder="작품에 대한 상세 설명을 입력하세요"
-              ></textarea>
-            </div>
+              <div class="form-group">
+                <label for="work-artist">의뢰인/아티스트</label>
+                <input
+                  type="text"
+                  id="work-artist"
+                  name="artist"
+                  placeholder="의뢰인 또는 아티스트 이름"
+                  class="admin-input"
+                />
+              </div>
 
-            <div class="form-actions">
-              <button class="admin-btn save-btn">작품 등록하기</button>
-              <button class="admin-btn cancel-btn" data-target="#work-list">
-                취소
-              </button>
-            </div>
+              <div class="form-row">
+                <div class="form-group half">
+                  <label for="work-style">영상 스타일</label>
+                  <select id="work-style" name="category" class="admin-select">
+                    <option value="cover">커버 영상</option>
+                    <option value="shorts">쇼츠</option>
+                    <option value="promotion">프로모션</option>
+                    <option value="story">스토리텔링</option>
+                  </select>
+                </div>
+
+                <div class="form-group half">
+                  <label for="work-year">제작 연도</label>
+                  <select id="work-year" name="year" class="admin-select">
+                    {% for year in range(2025, 2019, -1) %}
+                    <option value="{{ year }}" {% if year == 2024 %}selected{% endif %}>{{ year }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="work-youtube">유튜브 URL</label>
+                <input
+                  type="text"
+                  id="work-youtube"
+                  name="youtube_url"
+                  placeholder="https://www.youtube.com/watch?v=..."
+                  class="admin-input"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="work-thumbnail">썸네일 이미지</label>
+                <div class="upload-box large-upload" id="thumbnail-upload-box">
+                  <input
+                    type="file"
+                    id="work-thumbnail"
+                    name="thumbnail"
+                    class="file-input"
+                    accept="image/*"
+                  />
+                  <label for="work-thumbnail" class="upload-label">
+                    <span class="upload-icon">+</span>
+                    <span class="upload-text">썸네일 업로드</span>
+                    <span class="upload-hint">권장 비율: 4:3, JPG 또는 PNG</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="work-desc">작품 상세 설명</label>
+                <textarea
+                  id="work-desc"
+                  name="description"
+                  class="admin-textarea"
+                  rows="5"
+                  placeholder="작품에 대한 상세 설명을 입력하세요"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="work-active">작품 활성화</label>
+                <input type="checkbox" id="work-active" name="is_active" checked>
+                <label for="work-active" class="checkbox-label">웹사이트에 작품 표시</label>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="admin-btn save-btn">작품 등록하기</button>
+                <button type="button" class="admin-btn cancel-btn" data-target="#work-list">
+                  취소
+                </button>
+              </div>
+            </form>
           </div>
         </section>
       </main>

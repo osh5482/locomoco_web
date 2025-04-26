@@ -1,0 +1,246 @@
+/* 
+ * work_detail.css - 작품 상세 페이지 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* 작품 상세 페이지 레이아웃 */
+.work-detail-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+/* 뒤로 가기 링크 */
+.back-link {
+  margin-bottom: 30px;
+}
+
+.back-btn {
+  display: inline-block;
+  color: #888;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+  color: #333;
+}
+
+/* 작품 헤더 */
+.work-detail-header {
+  margin-bottom: 40px;
+}
+
+.work-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.work-meta {
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.work-artist,
+.work-year,
+.work-category {
+  margin-right: 10px;
+}
+
+/* 작품 미디어 (비디오 또는 이미지) */
+.work-media {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 비율 */
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image-container {
+  width: 100%;
+  text-align: center;
+}
+
+.work-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* 작품 설명 */
+.work-description {
+  margin-bottom: 50px;
+}
+
+.work-description h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.work-description h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #333;
+}
+
+.description-content {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.description-content p {
+  margin-bottom: 15px;
+}
+
+/* 관련 작품 */
+.related-works {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.related-works h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.related-works h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #333;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.related-item {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.related-item:hover {
+  transform: translateY(-5px);
+}
+
+.related-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%; /* 4:3 비율 */
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.related-thumbnail img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.related-item:hover .related-thumbnail img {
+  transform: scale(1.05);
+}
+
+.related-title {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #333;
+  text-align: center;
+}
+
+.related-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 1200px) {
+  .related-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .work-title {
+    font-size: 2rem;
+  }
+
+  .related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .work-title {
+    font-size: 1.8rem;
+  }
+
+  .work-description h2,
+  .related-works h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .work-title {
+    font-size: 1.6rem;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-meta {
+    font-size: 0.85rem;
+  }
+
+  .description-content {
+    font-size: 0.95rem;
+  }
+}

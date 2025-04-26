@@ -6,6 +6,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   console.log("관리자 페이지가 로드되었습니다.");
 
+  // 방문자 차트 초기화
+  initVisitChart();
+
   // URL 해시(#) 확인하여 해당 섹션 활성화
   function activateSectionFromHash() {
     // 현재 URL의 해시 가져오기 (기본값: #dashboard)
@@ -38,6 +41,29 @@ document.addEventListener("DOMContentLoaded", function () {
     if (targetSection) {
       targetSection.classList.add("active");
     }
+  }
+
+  // 방문자 차트 초기화 함수
+  function initVisitChart() {
+    const visitBars = document.querySelectorAll(".visit-bar");
+    let maxCount = 0;
+
+    // 최대 방문자 수 찾기
+    visitBars.forEach((bar) => {
+      const count = parseInt(bar.dataset.count || 0);
+      if (count > maxCount) maxCount = count;
+    });
+
+    // 각 바에 높이 적용
+    visitBars.forEach((bar) => {
+      const count = parseInt(bar.dataset.count || 0);
+      // 최대값이 0인 경우 모든 바를 0%로 설정
+      const heightPercent = maxCount > 0 ? (count / maxCount) * 100 : 0;
+      bar.style.height = heightPercent + "%";
+
+      // 툴팁 추가 (방문자 수 표시)
+      bar.setAttribute("title", `방문자: ${count}명`);
+    });
   }
 
   // 페이지 로드 시 초기화 함수 실행
@@ -144,13 +170,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         document.querySelector(targetId).classList.add("active");
+
+        // 폼 초기화
+        if (targetId === "#work-add") {
+          resetWorkForm();
+        }
       }
       // ID에 따른 특정 기능 수행
       else if (this.id) {
         switch (this.id) {
           case "refresh-btn":
-            // 새로고침 기능 (나중에 AJAX로 구현)
-            alert("캐시가 새로고침되었습니다.");
+            // 페이지 새로고침
+            window.location.reload();
             break;
           case "backup-btn":
             // 백업 다운로드 기능 (나중에 서버 연동)
@@ -238,27 +269,114 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 작품 편집 버튼
+  // About 페이지 폼 제출 처리
+  const aboutForms = document.querySelectorAll(".about-edit-form");
+  aboutForms.forEach((form) => {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+
+      // 프로필 이미지는 ko 폼에서만 처리
+      const langCode = formData.get("lang_code");
+
+      if (langCode === "ko") {
+        // 프로필 이미지 업로드 처리
+        const profileImage = document.getElementById("profile-image");
+
+        if (profileImage.files && profileImage.files[0]) {
+          // 별도 API로 이미지 먼저 업로드
+          const imageFormData = new FormData();
+          imageFormData.append("profile_image", profileImage.files[0]);
+
+          fetch("/api/admin/profile-image", {
+            method: "POST",
+            body: imageFormData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Profile image update response:", data);
+
+              if (data.status === "success") {
+                // 이미지 업로드 성공 시 About 내용 업데이트
+                updateAboutContent(formData);
+              } else {
+                alert("이미지 업로드 중 오류가 발생했습니다: " + data.message);
+              }
+            })
+            .catch((error) => {
+              console.error("Error uploading image:", error);
+              alert("이미지 업로드 중 오류가 발생했습니다.");
+            });
+        } else {
+          // 이미지 변경 없이 About 내용만 업데이트
+          updateAboutContent(formData);
+        }
+      } else {
+        // 한국어가 아닌 경우 About 내용만 업데이트
+        updateAboutContent(formData);
+      }
+    });
+  });
+
+  // About 콘텐츠 업데이트 함수
+  function updateAboutContent(formData) {
+    fetch("/api/admin/about", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("About content update response:", data);
+
+        if (data.status === "success") {
+          alert(data.message);
+        } else {
+          alert("콘텐츠 업데이트 중 오류가 발생했습니다: " + data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating about content:", error);
+        alert("콘텐츠 업데이트 중 오류가 발생했습니다.");
+      });
+  }
+
+  // Work 편집 버튼
   const editButtons = document.querySelectorAll(".edit-btn");
 
   editButtons.forEach((btn) => {
     btn.addEventListener("click", function () {
-      // 실제 구현 시에는 해당 작품 데이터를 불러와 편집 폼에 채워넣기
+      const workId = this.getAttribute("data-work-id");
 
-      // 편집 섹션으로 이동
-      sections.forEach((section) => {
-        section.classList.remove("active");
-      });
+      // 작품 정보 가져오기 API 호출 (실제로는 구현 필요)
+      fetch(`/api/admin/work/${workId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === "success") {
+            populateWorkForm(data.work);
 
-      const workAddSection = document.querySelector("#work-add");
-      if (workAddSection) {
-        workAddSection.classList.add("active");
-        // 폼 제목 변경
-        const headerTitle = workAddSection.querySelector(".admin-header h1");
-        if (headerTitle) {
-          headerTitle.textContent = "작품 편집";
-        }
-      }
+            // 편집 모드로 UI 변경
+            const workAddSection = document.querySelector("#work-add");
+            const headerTitle =
+              workAddSection.querySelector(".admin-header h1");
+            const submitBtn = workAddSection.querySelector(".save-btn");
+
+            headerTitle.textContent = "작품 편집";
+            submitBtn.textContent = "작품 업데이트";
+
+            // 편집 섹션으로 이동
+            sections.forEach((section) => {
+              section.classList.remove("active");
+            });
+            workAddSection.classList.add("active");
+          } else {
+            alert("작품 정보를 불러올 수 없습니다: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching work data:", error);
+          alert("작품 정보를 불러오는 중 오류가 발생했습니다.");
+        });
     });
   });
 
@@ -267,44 +385,137 @@ document.addEventListener("DOMContentLoaded", function () {
 
   deleteButtons.forEach((btn) => {
     btn.addEventListener("click", function () {
-      // 실제 구현 시에는 확인 대화상자 표시 후 삭제 처리
+      const workId = this.getAttribute("data-work-id");
+
+      // 삭제 확인
       if (confirm("정말 이 작품을 삭제하시겠습니까?")) {
-        // 삭제 확인 시 처리할 기능 (백엔드 연결 시 구현)
-        alert("삭제되었습니다.");
+        // 삭제 API 호출
+        fetch(`/api/admin/work/${workId}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              alert(data.message);
+
+              // 삭제된 작품 요소 제거
+              const workItem = document.querySelector(
+                `.work-admin-item[data-work-id="${workId}"]`
+              );
+              if (workItem) {
+                workItem.remove();
+              }
+            } else {
+              alert("작품 삭제 중 오류가 발생했습니다: " + data.message);
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting work:", error);
+            alert("작품 삭제 중 오류가 발생했습니다.");
+          });
       }
     });
   });
 
-  // 폼 저장 버튼 (나중에 AJAX 제출로 구현)
-  const saveButtons = document.querySelectorAll(".save-btn");
-
-  saveButtons.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
+  // 작품 등록/수정 폼 제출 처리
+  const workForm = document.getElementById("work-form");
+  if (workForm) {
+    workForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      // 간단한 폼 유효성 검사
-      let isValid = true;
-      const section = this.closest(".admin-section");
+      const formData = new FormData(this);
 
-      // 필수 입력 필드 검사 (실제 구현 시 확장)
-      const requiredFields = section.querySelectorAll(
-        "input[required], textarea[required]"
-      );
-      requiredFields.forEach((field) => {
-        if (!field.value.trim()) {
-          isValid = false;
-          field.classList.add("invalid");
-        } else {
-          field.classList.remove("invalid");
-        }
-      });
+      // 체크박스 처리
+      const isActive = document.getElementById("work-active").checked;
+      formData.set("is_active", isActive);
 
-      if (isValid) {
-        // 폼 저장 성공 메시지 (실제로는 AJAX 요청으로 대체)
-        alert("변경사항이 저장되었습니다.");
-      } else {
-        alert("필수 항목을 모두 입력해주세요.");
-      }
+      // 작품 등록/수정 API 호출
+      fetch("/api/admin/work", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === "success") {
+            alert(data.message);
+
+            // Work 목록 페이지로 이동 및 페이지 새로고침
+            window.location.href = "/admin#work-list";
+            window.location.reload();
+          } else {
+            alert("작품 저장 중 오류가 발생했습니다: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error saving work:", error);
+          alert("작품 저장 중 오류가 발생했습니다.");
+        });
     });
-  });
+  }
+
+  // 작품 폼 초기화 함수
+  function resetWorkForm() {
+    const form = document.getElementById("work-form");
+    if (form) {
+      form.reset();
+
+      // 숨겨진 ID 필드 초기화
+      document.getElementById("work-id").value = "";
+
+      // 미리보기 이미지 제거
+      const previewImage = document.querySelector(
+        "#thumbnail-upload-box .preview-uploaded"
+      );
+      if (previewImage) {
+        previewImage.remove();
+      }
+
+      // 라벨 스타일 복원
+      const label = document.querySelector(
+        "#thumbnail-upload-box .upload-label"
+      );
+      if (label) {
+        label.style.opacity = "1";
+      }
+
+      // 헤더와 버튼 텍스트 변경
+      const headerTitle = document.querySelector("#work-add .admin-header h1");
+      const submitBtn = document.querySelector("#work-add .save-btn");
+
+      headerTitle.textContent = "새 작품 등록";
+      submitBtn.textContent = "작품 등록하기";
+    }
+  }
+
+  // 작품 폼에 데이터 채우기 함수
+  function populateWorkForm(work) {
+    document.getElementById("work-id").value = work.id;
+    document.getElementById("work-title").value = work.title;
+    document.getElementById("work-artist").value = work.artist || "";
+    document.getElementById("work-style").value = work.category;
+    document.getElementById("work-year").value = work.year;
+    document.getElementById("work-youtube").value = work.youtube_url || "";
+    document.getElementById("work-desc").value = work.description || "";
+    document.getElementById("work-active").checked = work.is_active;
+
+    // 썸네일 이미지 미리보기 설정
+    if (work.thumbnail_path) {
+      const uploadBox = document.getElementById("thumbnail-upload-box");
+      let previewImage = uploadBox.querySelector(".preview-uploaded");
+
+      if (!previewImage) {
+        previewImage = document.createElement("img");
+        previewImage.className = "preview-uploaded";
+        uploadBox.appendChild(previewImage);
+
+        // 라벨 스타일 변경
+        const label = uploadBox.querySelector(".upload-label");
+        if (label) {
+          label.style.opacity = "0.2";
+        }
+      }
+
+      previewImage.src = work.thumbnail_path;
+    }
+  }
 });
