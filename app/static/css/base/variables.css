@@ -1,0 +1,84 @@
+/* 
+ * variables.css - CSS 변수 정의
+ * locomoco 포트폴리오 웹사이트
+ */
+
+:root {
+  /* 색상 */
+  --color-text-primary: #333;
+  --color-text-secondary: #444;
+  --color-text-tertiary: #555;
+  --color-text-quaternary: #666;
+  --color-text-quinary: #777;
+  --color-text-muted: #888;
+
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f9f9f9;
+  --color-bg-tertiary: #f8f9fa;
+  --color-bg-quaternary: #f5f5f5;
+  --color-bg-quinary: #f0f0f0;
+
+  --color-border-light: #f0f0f0;
+  --color-border-medium: #eee;
+  --color-border-dark: #ddd;
+
+  --color-accent-blue: #3a6ea5;
+  --color-accent-blue-dark: #1e4b7b;
+  --color-accent-green: #4a8e4a;
+  --color-accent-green-dark: #306830;
+  --color-accent-red: #d95555;
+  --color-accent-red-dark: #ad3e3e;
+
+  /* 폰트 */
+  --font-family-base: "Noto Sans KR", "Noto Sans JP", "Poppins", sans-serif;
+  --font-size-base: 16px;
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.85rem; /* 13.6px */
+  --font-size-md: 0.9rem; /* 14.4px */
+  --font-size-default: 1rem; /* 16px */
+  --font-size-lg: 1.1rem; /* 17.6px */
+  --font-size-xl: 1.4rem; /* 22.4px */
+  --font-size-xxl: 1.6rem; /* 25.6px */
+  --font-size-xxxl: 1.8rem; /* 28.8px */
+  --font-size-xxxxl: 2rem; /* 32px */
+  --font-size-xxxxxl: 2.2rem; /* 35.2px */
+  --font-size-xxxxxxl: 2.5rem; /* 40px */
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-base: 1.6;
+  --line-height-loose: 1.8;
+
+  /* 간격 */
+  --spacing-xxs: 5px;
+  --spacing-xs: 8px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 25px;
+  --spacing-xxl: 30px;
+  --spacing-xxxl: 40px;
+  --spacing-xxxxl: 50px;
+
+  /* 레이아웃 */
+  --sidebar-width: 180px;
+  --container-max-width: 1200px;
+
+  /* 테두리 */
+  --border-radius-sm: 3px;
+  --border-radius-md: 5px;
+
+  /* 애니메이션 */
+  --transition-fast: 0.2s;
+  --transition-base: 0.3s;
+  --transition-slow: 0.5s;
+
+  /* 쉐도우 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+}

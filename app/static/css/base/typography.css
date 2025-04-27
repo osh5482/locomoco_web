@@ -1,0 +1,135 @@
+/* 
+ * typography.css - 타이포그래피 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* 기본 타이포그래피 */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+}
+
+/* 제목 스타일 */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 16px;
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+h1 {
+  font-size: var(--font-size-xxxxxl);
+}
+
+h2 {
+  font-size: var(--font-size-xxl);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+h4 {
+  font-size: var(--font-size-lg);
+}
+
+/* 단락 스타일 */
+p {
+  margin-bottom: 15px;
+  line-height: var(--line-height-loose);
+}
+
+/* 목록 스타일 */
+ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+/* 텍스트 정렬 */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* 텍스트 스타일 */
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* 링크 스타일 */
+a {
+  color: var(--color-text-muted);
+  transition: color var(--transition-base) ease;
+}
+
+a:hover {
+  color: var(--color-text-primary);
+}
+
+/* 헤더 밑줄 효과 */
+.underline-header {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-header::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--color-text-primary);
+}
+
+/* 반응형 타이포그래피 */
+@media (max-width: 992px) {
+  h1 {
+    font-size: var(--font-size-xxxxl);
+  }
+
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-xxxl);
+  }
+
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: var(--font-size-xxl);
+  }
+
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  p,
+  li {
+    font-size: var(--font-size-md);
+  }
+}

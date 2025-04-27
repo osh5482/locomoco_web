@@ -1,0 +1,105 @@
+/* 
+ * sidebar.css - 사이드바 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* 사이드바 공통 스타일 */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+  padding: var(--spacing-xxl) var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: fixed;
+  background-color: var(--color-bg-primary);
+}
+
+/* 왼쪽 사이드바 */
+.left-sidebar {
+  left: 0;
+  border-right: 1px solid var(--color-border-light);
+}
+
+/* 오른쪽 사이드바 */
+.right-sidebar {
+  right: 0;
+  border-left: 1px solid var(--color-border-light);
+}
+
+/* 사이드바 내부 구성 */
+.sidebar-section {
+  margin-bottom: var(--spacing-xxl);
+}
+
+.sidebar-section:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
+}
+
+/* 관리자 정보 (admin 페이지) */
+.admin-info {
+  margin-top: auto;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border-light);
+  width: 100%;
+}
+
+.admin-info p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-quaternary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.exit-admin-btn {
+  background: none;
+  border: 1px solid var(--color-border-dark);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-quaternary);
+  cursor: pointer;
+  transition: all var(--transition-base) ease;
+  width: 100%;
+}
+
+.exit-admin-btn:hover {
+  background-color: var(--color-bg-quaternary);
+  color: var(--color-text-primary);
+}
+
+/* 반응형 사이드바 */
+@media (max-width: 992px) {
+  .right-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    padding: var(--spacing-md) var(--spacing-lg);
+    position: static;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid var(--color-border-light);
+    justify-content: space-between;
+  }
+
+  .admin-info {
+    display: none; /* 모바일에서는 관리자 정보 숨김 */
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}

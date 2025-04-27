@@ -1,0 +1,201 @@
+/* 
+ * dashboard.css - 관리자 대시보드 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* 관리자 페이지 공통 스타일 */
+.admin-section {
+  display: none;
+  width: 100%;
+  margin-bottom: var(--spacing-xxxl);
+}
+
+.admin-section.active {
+  display: block;
+}
+
+.admin-header {
+  margin-bottom: var(--spacing-xxl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-header h1 {
+  font-size: var(--font-size-xxxxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+/* 대시보드 스타일 */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+}
+
+.dashboard-card {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border-medium);
+}
+
+.card-header h2 {
+  font-size: var(--font-size-lg);
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.card-content {
+  padding: var(--spacing-lg);
+}
+
+/* 포트폴리오 통계 카드 */
+.stat-summary {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md) var(--spacing-sm);
+  flex: 1;
+  min-width: 80px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: var(--font-size-xxxxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xxs);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-quinary);
+}
+
+/* 차트 스타일 */
+.chart-container {
+  width: 100%;
+}
+
+.simple-chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 150px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.chart-bar {
+  flex: 1;
+  margin: 0 3px;
+  background-color: var(--color-accent-blue);
+  border-radius: 3px 3px 0 0;
+  position: relative;
+  transition: height var(--transition-base);
+  max-width: 25px;
+}
+
+.chart-bar:hover {
+  background-color: var(--color-accent-blue-dark);
+}
+
+.chart-bar span {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-quinary);
+}
+
+.chart-caption {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-quinary);
+  margin-top: 25px;
+}
+
+/* 업데이트 목록 */
+.update-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.update-item {
+  display: flex;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.update-item:last-child {
+  border-bottom: none;
+}
+
+.update-date {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-quinary);
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.update-content {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+/* 빠른 작업 버튼 */
+.quick-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+}
+
+/* 반응형 스타일 */
+@media (max-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-header .admin-btn {
+    margin-top: var(--spacing-md);
+  }
+}
+
+@media (max-width: 576px) {
+  .admin-header h1 {
+    font-size: var(--font-size-xxl);
+  }
+
+  .card-header h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .quick-action-grid {
+    grid-template-columns: 1fr;
+  }
+}

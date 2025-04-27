@@ -4,15 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>locomoco | 관리자</title>
-    <!-- FastAPI에서 정적 파일 경로 수정 -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', path='/css/main.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', path='/css/admin.css') }}"
-    />
+    
+    <!-- 기본 CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/base/variables.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/base/reset.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/base/typography.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/base/layout.css') }}" />
+    
+    <!-- 컴포넌트 CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/components/sidebar.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/components/navigation.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/components/buttons.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/components/forms.css') }}" />
+    
+    <!-- 관리자 CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/admin/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/admin/admin_forms.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/admin/tables.css') }}" />
+    
+    <!-- 폰트 -->
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Poppins:wght@300;400;500;700&display=swap"
       rel="stylesheet"
@@ -479,42 +489,6 @@
               </div>
             </form>
           </div>
-          
-          <!-- GIF 업로드 섹션 (기존 작품 수정 시에만 표시) -->
-          <div id="gif-upload-section" class="hidden">
-            <h2 class="gif-title">GIF 이미지 업로드</h2>
-            <p class="gif-description">작품 상세 페이지에 표시될 GIF 이미지를 업로드하세요. 최대 4개까지 가능합니다.</p>
-            
-            <form id="gif-upload-form" class="gif-upload-form">
-              <input type="hidden" id="gif-work-id" name="work_id" value="">
-              
-              <div class="gif-upload-grid">
-                <div class="upload-box" id="gif-upload-box">
-                  <input
-                    type="file"
-                    id="work-gifs"
-                    name="gif_files"
-                    class="file-input"
-                    accept="image/gif, image/jpeg, image/png"
-                    multiple
-                  />
-                  <label for="work-gifs" class="upload-label">
-                    <span class="upload-icon">+</span>
-                    <span class="upload-text">GIF 이미지 한번에 업로드 (최대 4개)</span>
-                    <span class="upload-hint">GIF, JPG, PNG 파일 가능</span>
-                  </label>
-                </div>
-              </div>
-              
-              <div class="gif-preview-grid" id="gif-preview-grid">
-                <!-- 업로드된 GIF 미리보기 영역 -->
-              </div>
-              
-              <div class="form-actions gif-actions">
-                <button type="submit" class="admin-btn save-btn">GIF 이미지 저장</button>
-              </div>
-            </form>
-          </div>
         </section>
       </main>
 
@@ -522,8 +496,16 @@
       <aside class="sidebar right-sidebar"></aside>
     </div>
 
-    <!-- JS 파일 경로 수정 -->
-    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
-    <script src="{{ url_for('static', path='/js/admin.js') }}"></script>
+    <!-- 유틸리티 JS -->
+    <script src="{{ url_for('static', path='/js/utils/dom.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/utils/forms.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/utils/api.js') }}"></script>
+    
+    <!-- 관리자 JS -->
+    <script src="{{ url_for('static', path='/js/admin/admin_core.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/admin/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/admin/about_manager.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/admin/work_manager.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/admin/file_upload.js') }}"></script>
   </body>
 </html>

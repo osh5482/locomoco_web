@@ -4,14 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>locomoco | Contact</title>
+
+    <!-- 기본 CSS -->
     <link
       rel="stylesheet"
-      href="{{ url_for('static', path='/css/main.css') }}"
+      href="{{ url_for('static', path='/css/base/variables.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', path='/css/contact.css') }}"
+      href="{{ url_for('static', path='/css/base/reset.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/base/typography.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/base/layout.css') }}"
+    />
+
+    <!-- 컴포넌트 CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/components/sidebar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/components/navigation.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/components/buttons.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/components/forms.css') }}"
+    />
+
+    <!-- 페이지 CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/pages/contact.css') }}"
+    />
+
+    <!-- 폰트 -->
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Poppins:wght@300;400;500;700&display=swap"
       rel="stylesheet"
@@ -143,9 +179,16 @@
       <aside class="sidebar right-sidebar"></aside>
     </div>
 
-    <!-- JS 파일 경로 수정 -->
-    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
-    <script src="{{ url_for('static', path='/js/language.js') }}"></script>
-    <script src="{{ url_for('static', path='/js/contact.js') }}"></script>
+    <!-- 유틸리티 JS -->
+    <script src="{{ url_for('static', path='/js/utils/dom.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/utils/forms.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/utils/api.js') }}"></script>
+
+    <!-- 컴포넌트 JS -->
+    <script src="{{ url_for('static', path='/js/components/navigation.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/components/language_switcher.js') }}"></script>
+
+    <!-- 페이지 JS -->
+    <script src="{{ url_for('static', path='/js/pages/contact.js') }}"></script>
   </body>
 </html>

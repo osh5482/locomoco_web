@@ -1,0 +1,83 @@
+/* 
+ * contact.css - Contact 페이지 특정 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* Contact 페이지 레이아웃 */
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: var(--spacing-xxxl);
+  align-items: center;
+}
+
+/* 헤더 영역 */
+.contact-header {
+  margin-bottom: var(--spacing-xxxxl);
+  text-align: center;
+  width: 100%;
+}
+
+.contact-header h1 {
+  font-size: var(--font-size-xxxxxxl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: 2px;
+}
+
+/* 컨택트 폼 컨테이너 */
+.contact-form-container {
+  display: flex;
+  width: 100%;
+  margin-top: var(--spacing-xxl);
+  justify-content: center;
+}
+
+/* 폼 영역 */
+.contact-form {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* 알림 메시지 */
+.contact-information {
+  margin-top: var(--spacing-xxxxl);
+  text-align: right;
+  width: 100%;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+  .contact-form-container {
+    flex-direction: column;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-header h1 {
+    font-size: var(--font-size-xxxxl);
+  }
+
+  .contact-header p {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-header {
+    margin-bottom: var(--spacing-xxl);
+  }
+
+  .contact-header h1 {
+    font-size: var(--font-size-xxxl);
+  }
+}

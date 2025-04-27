@@ -10,78 +10,60 @@
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding-top: 20px;
+  padding-top: var(--spacing-lg);
 }
 
 /* 뒤로 가기 링크 */
 .back-link {
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-xxl);
 }
 
-.back-btn {
+/* 뒤로 가기 버튼 - 구체적인 선택자로 우선순위 높임 */
+.back-link .back-btn {
   display: inline-block;
-  color: #888;
+  color: var(--color-text-muted);
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
+  font-size: var(--font-size-md);
+  transition: color var(--transition-base) ease;
+  background-color: transparent; /* 배경색을 명시적으로 투명하게 설정 */
+  padding: 0; /* 패딩 제거 */
+  border: none; /* 테두리 제거 */
 }
 
-.back-btn:hover {
-  color: #333;
+.back-link .back-btn:hover {
+  color: var(--color-text-primary);
+  background-color: transparent; /* 호버 시에도 배경색 투명 유지 */
+  transform: none; /* 변형 효과 제거 */
 }
 
 /* 작품 헤더 */
 .work-detail-header {
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-xxxl);
 }
 
 .work-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 15px;
+  font-size: var(--font-size-xxxxxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
 }
 
 .work-meta {
-  font-size: 0.95rem;
-  color: #888;
-  margin-bottom: 10px;
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
 }
 
 .work-artist,
 .work-year,
 .work-category {
-  margin-right: 10px;
-}
-
-/* GIF 그리드 스타일 (새로 추가) */
-.work-gif-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 30px;
-  width: 100%;
-}
-
-.gif-item {
-  aspect-ratio: 1/1;
-  overflow: hidden;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.gif-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  margin-right: var(--spacing-sm);
 }
 
 /* 작품 미디어 (비디오 또는 이미지) */
 .work-media {
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: var(--spacing-xxxxl);
 }
 
 .video-container {
@@ -89,7 +71,7 @@
   width: 100%;
   padding-bottom: 56.25%; /* 16:9 비율 */
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: var(--border-radius-md);
 }
 
 .video-container iframe {
@@ -108,19 +90,19 @@
 .work-image {
   max-width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: var(--border-radius-md);
 }
 
 /* 작품 설명 */
 .work-description {
-  margin-bottom: 50px;
+  margin-bottom: var(--spacing-xxxxl);
 }
 
 .work-description h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 20px;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
   position: relative;
 }
 
@@ -131,31 +113,31 @@
   left: 0;
   width: 40px;
   height: 2px;
-  background-color: #333;
+  background-color: var(--color-text-primary);
 }
 
 .description-content {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #444;
+  font-size: var(--font-size-default);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
 }
 
 .description-content p {
-  margin-bottom: 15px;
+  margin-bottom: var(--spacing-md);
 }
 
 /* 관련 작품 */
 .related-works {
-  margin-top: 30px;
-  padding-top: 30px;
-  border-top: 1px solid #f0f0f0;
+  margin-top: var(--spacing-xxl);
+  padding-top: var(--spacing-xxl);
+  border-top: 1px solid var(--color-border-light);
 }
 
 .related-works h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 25px;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xl);
   position: relative;
 }
 
@@ -166,20 +148,20 @@
   left: 0;
   width: 40px;
   height: 2px;
-  background-color: #333;
+  background-color: var(--color-text-primary);
 }
 
 .related-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: var(--spacing-lg);
   width: 100%;
 }
 
 .related-item {
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-base) ease;
 }
 
 .related-item:hover {
@@ -192,8 +174,8 @@
   height: 0;
   padding-bottom: 75%; /* 4:3 비율 */
   overflow: hidden;
-  background-color: #f5f5f5;
-  border-radius: 5px;
+  background-color: var(--color-bg-quaternary);
+  border-radius: var(--border-radius-md);
 }
 
 .related-thumbnail img {
@@ -203,7 +185,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform var(--transition-slow) ease;
 }
 
 .related-item:hover .related-thumbnail img {
@@ -211,9 +193,9 @@
 }
 
 .related-title {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #333;
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
   text-align: center;
 }
 
@@ -232,7 +214,7 @@
 
 @media (max-width: 992px) {
   .work-title {
-    font-size: 2rem;
+    font-size: var(--font-size-xxxxl);
   }
 
   .related-grid {
@@ -242,23 +224,18 @@
 
 @media (max-width: 768px) {
   .work-title {
-    font-size: 1.8rem;
+    font-size: var(--font-size-xxxl);
   }
 
   .work-description h2,
   .related-works h2 {
-    font-size: 1.4rem;
-  }
-
-  .work-gif-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    font-size: var(--font-size-xl);
   }
 }
 
 @media (max-width: 576px) {
   .work-title {
-    font-size: 1.6rem;
+    font-size: var(--font-size-xxl);
   }
 
   .related-grid {
@@ -266,15 +243,10 @@
   }
 
   .work-meta {
-    font-size: 0.85rem;
+    font-size: var(--font-size-xs);
   }
 
   .description-content {
-    font-size: 0.95rem;
-  }
-
-  .work-gif-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
+    font-size: var(--font-size-md);
   }
 }

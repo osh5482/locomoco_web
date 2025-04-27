@@ -4,18 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>locomoco | {{ work.title }}</title>
+
+    <!-- 기본 CSS -->
     <link
       rel="stylesheet"
-      href="{{ url_for('static', path='/css/main.css') }}"
+      href="{{ url_for('static', path='/css/base/variables.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', path='/css/work.css') }}"
+      href="{{ url_for('static', path='/css/base/reset.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', path='/css/work_detail.css') }}"
+      href="{{ url_for('static', path='/css/base/typography.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/base/layout.css') }}"
+    />
+
+    <!-- 컴포넌트 CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/components/sidebar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/components/navigation.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/components/buttons.css') }}"
+    />
+
+    <!-- 페이지 CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/pages/work.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='/css/pages/work_detail.css') }}"
+    />
+
+    <!-- 폰트 -->
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Poppins:wght@300;400;500;700&display=swap"
       rel="stylesheet"
@@ -101,21 +133,6 @@
             </p>
           </div>
 
-          <!-- GIF 그리드 영역 (새로 추가) -->
-          {% if gifs %}
-          <div class="work-gif-grid">
-            {% for gif in gifs %}
-            <div class="gif-item">
-              <img
-                src="{{ gif.path }}"
-                alt="작품 GIF {{ gif.position + 1 }}"
-                class="gif-image"
-              />
-            </div>
-            {% endfor %}
-          </div>
-          {% endif %}
-
           <!-- 작품 미디어 (유튜브 영상 또는 이미지) -->
           <div class="work-media">
             {% if work.youtube_url %}
@@ -186,8 +203,13 @@
       <aside class="sidebar right-sidebar"></aside>
     </div>
 
-    <!-- JS 파일 경로 수정 -->
-    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
+    <!-- 유틸리티 JS -->
+    <script src="{{ url_for('static', path='/js/utils/dom.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/utils/api.js') }}"></script>
+
+    <!-- 컴포넌트 JS -->
+    <script src="{{ url_for('static', path='/js/components/navigation.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/components/language_switcher.js') }}"></script>
 
     <!-- 번역 데이터를 숨겨진 요소에 저장 -->
     <div
@@ -206,6 +228,5 @@
       );
       window.currentLang = translationsElement.dataset.lang;
     </script>
-    <script src="{{ url_for('static', path='/js/language.js') }}"></script>
   </body>
 </html>

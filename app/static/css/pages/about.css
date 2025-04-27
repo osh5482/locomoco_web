@@ -15,11 +15,11 @@
 /* 왼쪽 콘텐츠 영역 */
 .left-content {
   flex: 1;
-  padding-right: 40px;
+  padding-right: var(--spacing-xxxl);
   display: flex;
   flex-direction: column;
   justify-content: center; /* 중앙 정렬 */
-  gap: 20px; /* 섹션 간의 간격 줄임 */
+  gap: var(--spacing-lg); /* 섹션 간의 간격 줄임 */
 }
 
 /* 오른쪽 이미지 영역 */
@@ -36,7 +36,7 @@
 }
 
 .biography h2 {
-  font-size: 1.6rem;
+  font-size: var(--font-size-xxl);
   margin-bottom: 16px;
   position: relative;
   display: inline-block;
@@ -49,18 +49,20 @@
   left: 0;
   width: 40px;
   height: 2px;
-  background-color: #333;
-}
-
-.bio-content {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #444;
-  white-space: pre-line; /* 줄바꿈 유지 */
+  background-color: var(--color-text-primary);
 }
 
 .bio-content p {
-  margin-bottom: 12px;
+  font-size: var(--font-size-default);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* 콘텐츠 줄바꿈 적용 */
+.bio-content,
+.desc-content {
+  white-space: pre-line; /* 줄바꿈 보존 */
 }
 
 /* 영상 설명 섹션 */
@@ -69,7 +71,7 @@
 }
 
 .video-description h2 {
-  font-size: 1.6rem;
+  font-size: var(--font-size-xxl);
   margin-bottom: 16px;
   position: relative;
   display: inline-block;
@@ -82,28 +84,24 @@
   left: 0;
   width: 40px;
   height: 2px;
-  background-color: #333;
-}
-
-.desc-content {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #444;
-  white-space: pre-line; /* 줄바꿈 유지 */
+  background-color: var(--color-text-primary);
 }
 
 .desc-content p {
-  margin-bottom: 12px;
+  font-size: var(--font-size-default);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
 }
 
 .desc-content ul {
-  margin-left: 20px;
-  margin-bottom: 15px;
+  margin-left: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .desc-content li {
-  margin-bottom: 8px;
-  color: #444;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-secondary);
 }
 
 /* 프로필 이미지 */
@@ -113,15 +111,15 @@
   height: auto;
   position: relative;
   overflow: hidden;
-  border-radius: 5px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
 }
 
 .main-profile {
   width: 100%;
   height: auto;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform var(--transition-slow) ease;
 }
 
 .profile-image:hover .main-profile {
@@ -135,7 +133,7 @@
   }
 
   .left-content {
-    padding-right: 30px;
+    padding-right: var(--spacing-xxl);
   }
 }
 
@@ -152,24 +150,24 @@
 
   .left-content {
     padding-right: 0;
-    margin-top: 40px;
+    margin-top: var(--spacing-xxxl);
   }
 
   .profile-image {
     max-width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: var(--spacing-xxl);
   }
 }
 
 @media (max-width: 576px) {
   .biography h2,
   .video-description h2 {
-    font-size: 1.4rem;
+    font-size: var(--font-size-xl);
   }
 
-  .bio-content,
-  .desc-content,
+  .bio-content p,
+  .desc-content p,
   .desc-content li {
-    font-size: 0.95rem;
+    font-size: var(--font-size-md);
   }
 }

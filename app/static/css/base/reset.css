@@ -1,0 +1,69 @@
+/* 
+ * reset.css - 리셋 및 기본 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* 리셋 및 기본 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  line-height: var(--line-height-base);
+}
+
+/* 기본 링크 스타일 */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-base) ease;
+}
+
+a:hover {
+  color: var(--color-text-primary);
+}
+
+/* 리스트 스타일 */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 이미지 스타일 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 버튼 리셋 */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  padding: 0;
+}
+
+/* 인풋 리셋 */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* 포커스 스타일 */
+:focus {
+  outline: none;
+}

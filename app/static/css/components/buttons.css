@@ -1,0 +1,187 @@
+/* 
+ * buttons.css - 버튼 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* 기본 버튼 */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base) ease;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: var(--color-text-tertiary);
+  transform: translateY(-2px);
+}
+
+/* 큰 버튼 */
+.btn-lg {
+  padding: var(--spacing-md) var(--spacing-xxxl);
+  font-size: var(--font-size-default);
+}
+
+/* 작은 버튼 */
+.btn-sm {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
+/* 전체 너비 버튼 */
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* 제출 버튼 (Contact 페이지) */
+.submit-btn {
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  border: none;
+  width: 160px;
+  height: 48px;
+  font-size: var(--font-size-default);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+    transform var(--transition-fast);
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-btn:hover {
+  background-color: var(--color-text-tertiary);
+  transform: translateY(-2px);
+}
+
+/* 추가 작품 로드 버튼 */
+.load-more-btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-xxxl);
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  text-decoration: none;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 1px;
+  transition: background-color var(--transition-base) ease,
+    transform var(--transition-fast) ease;
+}
+
+.load-more-btn:hover {
+  background-color: var(--color-text-tertiary);
+  transform: translateY(-2px);
+}
+
+/* 관리자 버튼 스타일 */
+.admin-btn {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base) ease;
+  text-decoration: none;
+}
+
+.admin-btn:hover {
+  background-color: var(--color-text-quaternary);
+}
+
+/* 저장 버튼 */
+.save-btn {
+  background-color: var(--color-accent-blue);
+}
+
+.save-btn:hover {
+  background-color: var(--color-accent-blue-dark);
+}
+
+/* 추가 버튼 */
+.add-btn {
+  background-color: var(--color-accent-green);
+}
+
+.add-btn:hover {
+  background-color: var(--color-accent-green-dark);
+}
+
+/* 삭제 버튼 */
+.delete-btn {
+  background-color: var(--color-accent-red);
+}
+
+.delete-btn:hover {
+  background-color: var(--color-accent-red-dark);
+}
+
+/* 관리자 취소 및 뒤로가기 버튼 */
+.admin-section .cancel-btn,
+.admin-section .back-btn {
+  background-color: var(--color-text-quinary);
+}
+
+.admin-section .cancel-btn:hover,
+.admin-section .back-btn:hover {
+  background-color: var(--color-text-tertiary);
+}
+
+/* 빠른 작업 버튼 */
+.quick-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md) var(--spacing-sm);
+  text-decoration: none;
+  color: var(--color-text-primary);
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.quick-action-btn:hover {
+  background-color: var(--color-bg-quaternary);
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-tertiary);
+}
+
+.action-text {
+  font-size: var(--font-size-xs);
+  text-align: center;
+}
+
+/* 반응형 버튼 */
+@media (max-width: 768px) {
+  .submit-btn,
+  .load-more-btn {
+    font-size: var(--font-size-md);
+  }
+
+  .admin-btn {
+    padding: var(--spacing-xxs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+  }
+}

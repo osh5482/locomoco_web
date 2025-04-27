@@ -1,0 +1,199 @@
+/* 
+ * admin-forms.css - 관리자 페이지 폼 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* 탭 스타일 */
+.edit-tabs {
+  display: flex;
+  margin-bottom: var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border-medium);
+}
+
+.tab-btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: var(--font-size-md);
+  color: var(--color-text-quinary);
+  cursor: pointer;
+  transition: all var(--transition-base) ease;
+  margin-right: var(--spacing-sm);
+}
+
+.tab-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.tab-btn.active {
+  color: var(--color-text-primary);
+  border-bottom-color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.tab-content {
+  width: 100%;
+}
+
+.tab-content.hidden {
+  display: none;
+}
+
+/* 관리자 폼 스타일 */
+.admin-input,
+.admin-textarea,
+.admin-select {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--border-radius-sm);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  transition: border-color var(--transition-base);
+}
+
+.admin-input:focus,
+.admin-textarea:focus,
+.admin-select:focus {
+  border-color: var(--color-text-quaternary);
+  outline: none;
+}
+
+.admin-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* About 페이지 폼 */
+.about-edit-form {
+  margin-bottom: var(--spacing-xxxl);
+}
+
+/* Work 편집 폼 */
+.work-edit-form {
+  margin-bottom: var(--spacing-xxxl);
+}
+
+/* 이미지 업로드 컨테이너 */
+.image-upload-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxl);
+}
+
+.current-image {
+  text-align: center;
+}
+
+.preview-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.current-image p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-quinary);
+}
+
+/* 파일 업로드 */
+.upload-box {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border: 2px dashed var(--color-border-dark);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all var(--transition-base) ease;
+}
+
+.upload-box:hover {
+  border-color: var(--color-text-muted);
+}
+
+.upload-box.large-upload {
+  height: 180px;
+}
+
+.upload-box.small-upload {
+  height: 100px;
+}
+
+.file-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-xxs);
+  color: var(--color-border-dark);
+}
+
+.upload-text {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-xxs);
+}
+
+.upload-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* 미리보기 업로드 이미지 */
+.preview-uploaded {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* 체크박스 스타일 */
+.checkbox-label {
+  display: inline-block;
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: var(--spacing-xxs);
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .image-upload-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+}

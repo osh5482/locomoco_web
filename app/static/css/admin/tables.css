@@ -1,0 +1,148 @@
+/* 
+ * tables.css - 관리자 페이지 테이블 및 그리드 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* Work 관리 그리드 스타일 */
+.work-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4개 항목으로 변경 */
+  gap: var(--spacing-xl);
+}
+
+.work-admin-item {
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base) ease,
+    box-shadow var(--transition-base) ease;
+}
+
+.work-admin-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.work-admin-thumb {
+  height: 0;
+  padding-bottom: 75%; /* 4:3 비율 유지 */
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg-secondary);
+}
+
+.work-admin-thumb img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-admin-info {
+  padding: var(--spacing-md);
+  flex-grow: 1;
+}
+
+.work-admin-info h3 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-primary);
+}
+
+.work-admin-info p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-quinary);
+  margin-bottom: var(--spacing-xxs);
+}
+
+.work-admin-actions {
+  display: flex;
+  padding: 0 var(--spacing-md) var(--spacing-md);
+  gap: var(--spacing-sm);
+}
+
+.work-admin-actions .admin-btn {
+  flex: 1;
+  text-align: center;
+}
+
+/* 테이블 스타일 */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacing-xxl);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border-medium);
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: var(--color-bg-secondary);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.admin-table tr:hover {
+  background-color: var(--color-bg-quaternary);
+}
+
+.admin-table .actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.admin-table .actions .admin-btn {
+  margin-left: var(--spacing-xxs);
+}
+
+/* 상태 뱃지 */
+.status-badge {
+  display: inline-block;
+  padding: 3px var(--spacing-xs);
+  border-radius: 12px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+}
+
+.status-active {
+  background-color: rgba(74, 142, 74, 0.1);
+  color: var(--color-accent-green);
+}
+
+.status-inactive {
+  background-color: rgba(217, 85, 85, 0.1);
+  color: var(--color-accent-red);
+}
+
+/* 반응형 테이블 */
+@media (max-width: 1200px) {
+  .work-admin-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .work-admin-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .work-admin-grid {
+    grid-template-columns: 1fr;
+  }
+}
