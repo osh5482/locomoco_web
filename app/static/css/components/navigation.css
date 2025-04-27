@@ -1,0 +1,136 @@
+/* 
+ * navigation.css - 내비게이션 스타일
+ * locomoco 포트폴리오 웹사이트
+ */
+
+/* 메인 내비게이션 */
+.main-nav ul {
+  list-style: none;
+}
+
+.main-nav li {
+  margin-bottom: var(--spacing-lg);
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-default);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 1px;
+  transition: color var(--transition-base) ease;
+}
+
+.main-nav a:hover {
+  color: var(--color-text-primary);
+}
+
+.main-nav .active a {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  position: relative;
+}
+
+.main-nav .active a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text-primary);
+}
+
+/* 언어 선택기 */
+.language-selector {
+  margin-top: var(--spacing-xxl);
+  margin-bottom: 0;
+}
+
+.language-selector ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+
+.language-selector li {
+  margin-right: var(--spacing-sm);
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  padding: 2px 2px;
+  letter-spacing: 1px;
+  transition: color var(--transition-base) ease;
+}
+
+.lang-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.lang-btn.active {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  position: relative;
+}
+
+/* 관리자 메뉴 */
+.admin-nav li {
+  margin-bottom: var(--spacing-lg);
+}
+
+.admin-nav-link {
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-default);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-base) ease;
+}
+
+.admin-nav-link:hover {
+  color: var(--color-text-primary);
+}
+
+.admin-nav .active .admin-nav-link {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* 반응형 네비게이션 */
+@media (max-width: 768px) {
+  .main-nav {
+    margin-right: var(--spacing-md);
+  }
+
+  .main-nav ul {
+    display: flex;
+  }
+
+  .main-nav li {
+    margin-right: var(--spacing-lg);
+    margin-bottom: 0;
+  }
+
+  .language-selector {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-nav a {
+    font-size: var(--font-size-sm);
+  }
+
+  .lang-btn {
+    font-size: var(--font-size-xs);
+  }
+
+  .main-nav li {
+    margin-right: var(--spacing-md);
+  }
+}
